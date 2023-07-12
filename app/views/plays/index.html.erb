@@ -1,0 +1,7 @@
+<h1>Scoreboard</h1>
+
+<% @plays.map do |play| %>
+  <p>Username: <%= User.find(play.user_id).username %>, Time (in seconds): <%= play.time_in_seconds %>, Win: <%= play.is_win %> </p>
+<% end %>
+
+<%= link_to 'Back to the Game', root_path %>
