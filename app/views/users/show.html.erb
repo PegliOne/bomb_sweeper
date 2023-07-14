@@ -1,3 +1,89 @@
-<h1>Profile Page</h1>
+<h2>Hi <%= @user.username %>!</h2>
 
-<%= link_to 'Back to the Game', root_path %>
+<h3>Details</h3>
+
+<p><span>Email:</span> <%= @user.email %></p>
+<p><span>Joined:</span> <%= @user.created_at.strftime("%-l:%M:%S%P %d/%m/%Y") %></p>
+<p><span>Win Percentage:</span> <%= (@user.plays.filter{ |play| play.is_win }.count.to_f / @user.plays.count.to_f) * 100 %>%</p>
+<p><span>Quickest Time:</span> <%= @user.plays.sort_by(&:time_in_seconds).first.time_in_seconds %> seconds at <%= @user.plays.sort_by(&:time_in_seconds).first.difficulty %> Difficulty</p>
+
+<p>You have won the following games.</p>
+
+<h3>Easy Top Scores</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Time (in seconds)</th>
+      <th>Difficulty</th>
+      <th>Achieved At</th>
+    </tr>
+  </thead>  
+  <tbody>
+    <% @user.plays.map do |play| %>
+      <% if play.is_win && play.difficulty == 'Easy' %>
+        <tr>
+          <td><%= User.find(play.user_id).username %></td>
+          <td><%= play.time_in_seconds %></td>
+          <td><%= play.difficulty %></td>
+          <td><%= play.created_at.strftime("%-l:%M:%S%P %d/%m/%Y") %></td>
+        </tr>
+      <% end %>  
+    <% end %>
+  </tbody>
+</table>
+
+<h3>Medium Top Scores</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Time (in seconds)</th>
+      <th>Difficulty</th>
+      <th>Achieved At</th>
+    </tr>
+  </thead>  
+  <tbody>
+    <% @user.plays.map do |play| %>
+      <% if play.is_win && play.difficulty == 'Medium' %>
+        <tr>
+          <td><%= User.find(play.user_id).username %></td>
+          <td><%= play.time_in_seconds %></td>
+          <td><%= play.difficulty %></td>
+          <td><%= play.created_at.strftime("%-l:%M:%S%P %d/%m/%Y") %></td>
+        </tr>
+      <% end %>  
+    <% end %>
+  </tbody>
+</table>
+
+<h3>Hard Top Scores</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Time (in seconds)</th>
+      <th>Difficulty</th>
+      <th>Achieved At</th>
+    </tr>
+  </thead>  
+  <tbody>
+    <% @user.plays.map do |play| %>
+      <% if play.is_win && play.difficulty == 'Hard' %>
+        <tr>
+          <td><%= User.find(play.user_id).username %></td>
+          <td><%= play.time_in_seconds %></td>
+          <td><%= play.difficulty %></td>
+          <td><%= play.created_at.strftime("%-l:%M:%S%P %d/%m/%Y") %></td>
+        </tr>
+      <% end %>  
+    <% end %>
+  </tbody>
+</table>
+
+<p>
+  <%= link_to 'Back to the Game', root_path, class: "btn btn-dark" %>
+</p>
