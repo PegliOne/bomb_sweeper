@@ -3,7 +3,8 @@
 <h3>Details</h3>
 
 <p><span>Email:</span> <%= @user.email %></p>
-<p><span>Joined:</span> <%= convert_time_to_date(@user.created_at) %></p>
+<!-- Show date only for user and convert to Aussie time -->
+<p><span>Joined:</span> <%= winning_plays_to_date(@user.created_at) %></p>
 <p><span>Win Percentage:</span> <%= @win_percentage %>%</p>
 <p><span>Quickest Time:</span> <%= @quickest_winning_play_time %> seconds at <%= @quickest_winning_play_difficulty %> Difficulty</p>
 

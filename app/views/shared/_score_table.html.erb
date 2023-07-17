@@ -1,0 +1,20 @@
+<table>
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Time (in seconds)</th>
+      <th>Difficulty</th>
+      <th>Achieved At</th>
+    </tr>
+  </thead>  
+  <tbody>
+    <% plays.map do |play| %>
+      <tr>
+        <td><%= User.find(play.user_id).username %></td>
+        <td><%= play.time_in_seconds %></td>
+        <td><%= play.difficulty %></td>
+        <td><%= convert_time(play.created_at) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
