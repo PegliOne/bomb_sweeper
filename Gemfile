@@ -43,7 +43,7 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "bootsnap", require: false
 
 # Enables React components
-gem "react_on_rails", "~> 6"
+gem 'react_on_rails', '11.1.4'
 
 # Use Sass to process CSS
 # gem "sassc-rails"
