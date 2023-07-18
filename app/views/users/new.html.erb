@@ -1,3 +1,26 @@
 <h1>Sign Up</h1>
 
+<%= form_with model: @user, url: sign_up_path do |form| %>
+  <div class="mb-3">
+    <%= form.label :username %>
+    <%= form.text_field :username, class: "form-control", placeholder: "Enter a name here ..." %>
+  </div>
+  <div class="mb-3">
+    <%= form.label :email %>
+    <%= form.text_field :email, type: 'email', class: "form-control", placeholder: "Enter an email here ..." %>
+  </div>
+  <div class="mb-3">
+    <%= form.label :password %>
+    <%= form.text_field :password, type: 'password', class: "form-control", placeholder: "Enter a password ..." %>
+  </div>
+  <div class="mb-3">
+    <%= form.label :password_confirmation %>
+    <%= form.text_field :password_confirmation, type: 'password', class: "form-control", placeholder: "Enter a password ..." %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.submit "Sign Up", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
 <%= render partial: "shared/home_link" %>

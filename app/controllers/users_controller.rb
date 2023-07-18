@@ -2,6 +2,15 @@ class UsersController < ApplicationController
   include ApplicationHelper
   
   def new
+    @user = User.new
+  end
+
+  def create
+    @user = User.create(user_params)
+    if @user.save
+      session[:user_id] = @user.id
+      redirect_to root_path
+    end
   end
 
   def show
@@ -16,8 +25,12 @@ class UsersController < ApplicationController
 
   private
 
+  def user_params
+    params.require(:user).permit(:username, :email, :password, :password_confirmation)
+  end
+
   def user
-    User.find_by(username: 'PegliOne')
+    User.find(@current_user.id)
   end  
 
   def winning_plays
