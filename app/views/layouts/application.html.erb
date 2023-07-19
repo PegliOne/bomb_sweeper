@@ -10,11 +10,14 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-    <%= javascript_pack_tag 'hello_react' %>
   </head>
 
   <body>
     <%= render partial: "shared/navbar" %>
-    <%= yield %>
+    <main class="d-flex flex-column align-items-center my-5">
+      <%= yield %>
+      <div id="root"></div>
+    </main>  
+    <%= javascript_include_tag 'http://localhost:4000/static/js/bundle.js' %>
   </body>
 </html>
