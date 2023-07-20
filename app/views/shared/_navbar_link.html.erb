@@ -1,0 +1,3 @@
+<li class="nav-item d-flex align-items-center <%= current_page?(path) ? 'bg-secondary' : '' %>">
+  <%= link_to text, path, class: "nav-link #{current_page?(path) ? 'active' : '' }" %>
+</li>

@@ -4,28 +4,18 @@
       <li class="nav-item d-flex align-items-center">
         <h1 class="navbar-brand mx-3 my-0">BombSweeper</h1>
       </li>  
-      <li class="nav-item d-flex align-items-center <%= current_page?(root_path) ? 'bg-secondary' : '' %>">
-        <%= link_to "The Game", root_path, class: "nav-link #{current_page?(root_path) ? 'active' : '' }" %>
-      </li>
-      <li class="nav-item d-flex align-items-center <%= current_page?(plays_path) ? 'bg-secondary' : '' %>">
-        <%= link_to 'Scoreboard', plays_path, class: "nav-link #{current_page?(plays_path) ? 'active' : '' }" %>
-      </li>
+      <%= render partial: "shared/navbar_link", locals: { text: "The Game", path: root_path } %>
+      <%= render partial: "shared/navbar_link", locals: { text: "Scoreboard", path: plays_path } %>
     </ul>
     <ul class="navbar-nav">
       <% if @current_user.present? %>
-        <li class="nav-item d-flex align-items-center <%= current_page?(user_path(@current_user.id)) ? 'bg-secondary' : '' %>">
-          <%= link_to 'View Profile', user_path(@current_user.id), class: "nav-link #{current_page?(user_path(@current_user.id)) ? 'active' : '' }" %>
-        </li>
+        <%= render partial: "shared/navbar_link", locals: { text: "View Profile", path: user_path(@current_user.id)} %>
         <li class="nav-item d-flex align-items-center">
           <%= link_to 'Log Out', log_out_path, data: { turbo_method: :delete }, class: "nav-link" %>
         </li>
       <% else %>  
-        <li class="nav-item d-flex align-items-center <%= current_page?(sign_up_path) ? 'bg-secondary' : '' %>">
-          <%= link_to 'Sign Up', sign_up_path, class: "nav-link #{current_page?(sign_up_path) ? 'active' : '' }" %>
-        </li>
-        <li class="nav-item d-flex align-items-center <%= current_page?(log_in_path) ? 'bg-secondary' : '' %>">
-          <%= link_to 'Log In', log_in_path, class: "nav-link #{current_page?(log_in_path) ? 'active' : '' }" %>
-        </li>
+        <%= render partial: "shared/navbar_link", locals: { text: "Sign Up", path: sign_up_path } %>
+        <%= render partial: "shared/navbar_link", locals: { text: "Log In", path: log_in_path } %>
       <% end %>  
     </ul>
   </nav>
