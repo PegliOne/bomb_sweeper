@@ -21,7 +21,11 @@ main > h2 {
 }
 
 main > h3 {
-  margin: 20px;
+  margin: 20px 0 16px;
+}
+
+main > section > h3 {
+  margin: 20px 0 16px;
 }
 
 section > div {
@@ -32,4 +36,12 @@ section > div > div {
   width: 20px;
   height: 20px;
   border: 1px solid black;
+}
+
+section > div > p > span {
+  font-weight: 600;
+}
+
+form > div > label {
+  font-weight: 600;
 }

@@ -2,10 +2,16 @@
 
 <h3>Details</h3>
 
-<p><span>Email:</span> <%= @user.email %></p>
-<p><span>Joined:</span> <%= convert_time_to_date(@user.created_at) %></p>
-<p><span>Win Percentage:</span> <%= @win_percentage %>%</p>
-<p><span>Quickest Time:</span> <%= @quickest_winning_play_time %> seconds at <%= @quickest_winning_play_difficulty %> Difficulty</p>
+<section class="d-flex justify-content-around w-50 mb-5">
+  <div class="d-flex flex-column">
+    <p><span>Email:</span> <%= @user.email %></p>
+    <p><span>Win Percentage:</span> <%= @win_percentage %>%</p>
+  </div>  
+  <div class="d-flex flex-column">
+    <p><span>Joined:</span> <%= convert_time_to_date(@user.created_at) %></p>
+    <p><span>Quickest Time:</span> <%= @quickest_winning_play_time %> seconds (<%= @quickest_winning_play_difficulty %>)</p>
+  </div>
+</section>
 
 <p>You have won the following games.</p>
 

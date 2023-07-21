@@ -1,4 +1,4 @@
-<%= form_with model: model, url: path do |form| %>
+<%= form_with model: model, url: path, class: "w-25 mt-5 mb-5" do |form| %>
   <% if type == "Sign Up" %>
     <%= render partial: "shared/form_input", locals: { form: form, label: :username, type: "text", placeholder: "Enter a name here ..." } %>
   <% end %>  
@@ -8,8 +8,8 @@
     <%= render partial: "shared/form_input", locals: { form: form, label: :password_confirmation, type: "password", placeholder: "Enter password again ..." } %>
   <% end %>  
 
-  <div class="mb-3">
-    <%= form.submit type, class: "btn btn-primary" %>
+  <div class="d-flex justify-content-center mt-5">
+    <%= form.submit type, class: "w-50 btn btn-dark" %>
   </div>
 <% end %>
 
