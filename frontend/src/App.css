@@ -33,9 +33,13 @@ section > div {
 }
 
 section > div > div {
-  width: 20px;
-  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 28px;
+  height: 28px;
   border: 1px solid black;
+  color: #8B0000;
 }
 
 section > div > p > span {
