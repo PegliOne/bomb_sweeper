@@ -28,6 +28,10 @@ main > section > h3 {
   margin: 20px 0 16px;
 }
 
+section.board {
+  border: 1px solid black;
+}
+
 section > div {
   display: flex;
 }
