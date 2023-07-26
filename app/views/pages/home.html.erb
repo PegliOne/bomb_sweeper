@@ -1,13 +1,23 @@
 <h2>Instructions</h2>
 
 <section class="mb-4 text-center">
-  <p>Add paragraphs explaining how to play the game once the game has been made</p>
+  <div class="d-flex flex-column mb-4">
+    <p>Add paragraphs explaining how to play the game once the game has been made</p>
 
-  <p>Add paragraphs explaining how to play the game once the game has been made</p>
+    <p>Add paragraphs explaining how to play the game once the game has been made</p>
 
-  <p>Add paragraphs explaining how to play the game once the game has been made</p>
+    <p>Add paragraphs explaining how to play the game once the game has been made</p>
 
-  <p>Enjoy the game!</p>
+    <p>Enjoy the game!</p>
+  </div>  
 
-  <h3 class="mt-5">Easy Board</h3>
+  <h3>Difficulty Settings</h3>
+
+  <ul class="d-flex justify-content-around mt-4 mb-5 list-unstyled">
+    <li><%= link_to 'Easy Board', root_path, class: "btn btn-dark px-4" %></li>
+    <li><%= link_to 'Medium Board', root_path, class: "btn btn-dark px-4" %></li>
+    <li><%= link_to 'Hard Board', root_path, class: "btn btn-dark px-4" %></li>
+  </ul>
+
+  <h3 class="mt-2">Easy Board</h3>
 </section>
