@@ -2,14 +2,14 @@
 
 <h3>Details</h3>
 
-<section class="d-flex justify-content-around w-50 mb-5">
-  <div class="d-flex flex-column">
+<section class="details d-flex justify-content-center w-75 mb-5">
+  <div class="d-flex flex-column mx-3">
     <p><span>Email:</span> <%= @user.email %></p>
     <p><span>Win Percentage:</span> <%= @win_percentage %>%</p>
   </div>  
-  <div class="d-flex flex-column">
+  <div class="d-flex flex-column mx-3">
     <p><span>Joined:</span> <%= convert_time_to_date(@user.created_at) %></p>
-    <p><span>Quickest Time:</span> <%= @quickest_winning_play_time %> seconds (<%= @quickest_winning_play_difficulty %>)</p>
+    <p><span>Quickest Time:</span> <%= @quickest_winning_play_time %>s (<%= @quickest_winning_play_difficulty %>)</p>
   </div>
 </section>
 
