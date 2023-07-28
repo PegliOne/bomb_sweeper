@@ -13,3 +13,107 @@
  *= require_tree .
  *= require_self
  */
+
+/* Change file name to .scss */
+/* Divide styles into files */
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  > header > nav {
+    height: fit-content;
+
+    > ul > li {
+      height: 48px;
+      padding: 0 8px;
+    }
+  }
+}
+
+main {
+  > h2 {
+    margin-bottom: 40px;
+  }  
+
+  > h3 {
+    margin: 20px 0 16px;
+  }
+
+  > section { 
+    > div {
+    display: flex;
+
+      p > span {
+        font-weight: 600;
+      }
+    }  
+
+    > ul > li > a {
+      width: 156px;
+    }
+
+    > h3 {
+      margin: 20px 0 16px;
+    }
+  }
+
+  > form > div > label {
+    font-weight: 600;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  nav {
+    flex-direction: column;
+
+    > ul {
+      width: 100%;
+
+      > li {
+        padding: 0 16px;
+      }
+    }
+  }
+
+  section {
+    &.details {
+      flex-direction: column;
+    }
+
+    > ul {
+      flex-direction: column;
+      align-items: center;
+
+      > li {
+        width: 60%;
+        margin: 8px 0;
+
+        > a {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  section.details {
+    flex-direction: column;
+    align-items: center;
+
+    > div {
+      align-items: center;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  nav > ul > li > h1 {
+    margin-left: 12px;
+  } 
+}
