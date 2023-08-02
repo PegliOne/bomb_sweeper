@@ -12,7 +12,7 @@ const Board = () => {
     setBombMatrix(bombMatrix);
   }, [])
 
-  if (window.location.pathname === '/') {
+  if (['/easy', '/medium', '/hard'].includes(window.location.pathname.toLowerCase())) {
     return (
       <section class="board">
         { bombMatrix.map((row) => {

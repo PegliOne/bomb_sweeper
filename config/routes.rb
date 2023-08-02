@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root to: 'pages#home'
+  get '/:difficulty', to: 'pages#home', as: 'game'
 
   get '/log_in', to: 'sessions#new'
   post '/log_in', to: 'sessions#create'

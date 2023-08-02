@@ -14,10 +14,10 @@
   <h3>Difficulty Settings</h3>
 
   <ul class="d-flex justify-content-around mt-4 mb-5 list-unstyled">
-    <li><%= link_to 'Easy Board', root_path, class: "btn btn-dark px-4" %></li>
-    <li><%= link_to 'Medium Board', root_path, class: "btn btn-dark px-4" %></li>
-    <li><%= link_to 'Hard Board', root_path, class: "btn btn-dark px-4" %></li>
+    <li><%= link_to 'Easy Board', game_path('easy'), class: "btn btn-dark px-4" %></li>
+    <li><%= link_to 'Medium Board', game_path('medium'), class: "btn btn-dark px-4" %></li>
+    <li><%= link_to 'Hard Board', game_path('hard'), class: "btn btn-dark px-4" %></li>
   </ul>
 
-  <h3 class="mt-2">Easy Board</h3>
+  <h3 class="mt-2"><%= @difficulty.capitalize %> Board</h3>
 </section>
