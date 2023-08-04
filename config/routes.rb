@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root to: 'pages#home'
-  get '/:difficulty', to: 'pages#home', as: 'game'
+  get 'game/:difficulty', to: 'pages#home', as: 'game'
 
   get '/log_in', to: 'sessions#new'
   post '/log_in', to: 'sessions#create'
@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get '/sign_up', to: 'users#new'
   post '/sign_up', to: 'users#create'
 
-  get '/profiles/:id', to: 'users#show', as: 'user'
+  get '/profile', to: 'users#show', as: 'user'
   delete '/profiles/:id', to: 'users#destroy', as: 'user_destroy'
 
   get '/scoreboard', to: 'plays#index', as: 'plays'

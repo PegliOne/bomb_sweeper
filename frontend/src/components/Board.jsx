@@ -12,15 +12,15 @@ const Board = () => {
     setBombMatrix(bombMatrix);
   }, [])
 
-  if (['/easy', '/medium', '/hard'].includes(window.location.pathname.toLowerCase())) {
+  if (['/game/easy', '/game/medium', '/game/hard'].includes(window.location.pathname.toLowerCase())) {
     return (
-      <section class="board">
-        { bombMatrix.map((row) => {
+      <section className="board">
+        { bombMatrix.map((row, index) => {
           return (
-            <div>
-              { row.map((square) => {
+            <div key={index}>
+              { row.map((square, index) => {
                 return (
-                  <div>{square}</div>
+                  <div key={index}>{square} {index}</div>
                 )  
               })}
             </div>
