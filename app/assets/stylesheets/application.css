@@ -23,91 +23,95 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}  
 
-  > header > nav {
-    height: fit-content;
-
-    > ul > li {
-      height: 48px;
-      padding: 0 8px;
-    }
-  }
+body > header > nav {
+  height: fit-content;
 }
 
-main {
-  > h2 {
-    margin-bottom: 40px;
-  }  
+body > header > nav > ul > li > a {
+  height: 48px;
+}
 
-  > h3 {
-    margin: 20px 0 16px;
-  }
+body > main > h2 {
+  margin-bottom: 40px;
+}  
 
-  > section { 
-    > div {
-    display: flex;
+body > main > h3 {
+  margin: 20px 0 16px;
+}
 
-      p > span {
-        font-weight: 600;
-      }
-    }  
+body > main > section > div { 
+  display: flex;
+}
+      
+body > main > section > p > span {
+  font-weight: 600;
+}
 
-    > ul > li > a {
-      width: 156px;
-    }
+body > main > section > ul > li > a {
+  width: 156px;
+}
 
-    > h3 {
-      margin: 20px 0 16px;
-    }
-  }
+body > main > section > h3 {
+  margin: 20px 0 16px;
+}
 
-  > form > div > label {
-    font-weight: 600;
-  }
+body > main > form > div > label {
+  font-weight: 600;
+}
+
+ul > li.selected > a {
+  background-color: #6C757D;
+  color: white;
+  cursor: default;
+}
+
+ul > li.selected > a:hover {
+  background-color: #6C757D;
+  color: white;
 }
 
 @media screen and (max-width: 767px) {
   nav {
     flex-direction: column;
-
-    > ul {
+  }
+  
+  nav > ul {
       width: 100%;
+  }    
 
-      > li {
-        padding: 0 16px;
-      }
-    }
+  nav > ul > li {
+    padding: 0 16px;
   }
 
-  section {
-    &.details {
-      flex-direction: column;
-    }
-
-    > ul {
-      flex-direction: column;
-      align-items: center;
-
-      > li {
-        width: 60%;
-        margin: 8px 0;
-
-        > a {
-          width: 100%;
-        }
-      }
-    }
+  section.details {
+    flex-direction: column;
   }
+
+  section > ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  section > ul > li {
+    width: 60%;
+    margin: 8px 0;
+  }  
+
+  section > ul > li > a {
+    width: 100%;
+  }        
 }
 
 @media screen and (max-width: 992px) {
   section.details {
     flex-direction: column;
     align-items: center;
+  }
 
-    > div {
-      align-items: center;
-    }
+  section.details > div {
+    align-items: center;
   }
 }
 

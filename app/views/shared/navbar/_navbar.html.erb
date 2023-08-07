@@ -11,7 +11,7 @@
       <% if @current_user.present? %>
         <%= render partial: "shared/navbar/navbar_link", locals: { text: "View Profile", path: user_path } %>
         <li class="nav-item d-flex align-items-center">
-          <%= link_to 'Log Out', log_out_path, data: { turbo_method: :delete }, class: "nav-link" %>
+          <%= link_to 'Log Out', log_out_path, data: { turbo_method: :delete }, class: "nav-link d-flex align-items-center px-3" %>
         </li>
       <% else %>  
         <%= render partial: "shared/navbar/navbar_link", locals: { text: "Sign Up", path: sign_up_path } %>
