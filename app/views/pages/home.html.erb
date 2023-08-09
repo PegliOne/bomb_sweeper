@@ -1,6 +1,6 @@
 <h2>Instructions</h2>
 
-<section class="mb-4 text-center">
+<section class="text-center">
   <div class="d-flex flex-column mb-4">
     <p>Add paragraphs explaining how to play the game once the game has been made</p>
 
@@ -19,5 +19,5 @@
     <li class="<%= @difficulty == 'hard' ? 'selected' : '' %>"><%= link_to 'Hard Board', game_path('hard'), class: "btn btn-dark px-4 border-0" %></li>
   </ul>
 
-  <h3 class="mt-2"><%= @difficulty.capitalize %> Board</h3>
+  <h3 class="mb-4"><%= @difficulty.capitalize %> Board</h3>
 </section>

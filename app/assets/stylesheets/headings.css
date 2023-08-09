@@ -1,0 +1,7 @@
+body > main > h2 {
+  margin-bottom: 32px;
+}  
+
+body > main > h3, body > main > section > h3 {
+  margin-bottom: 0;
+}

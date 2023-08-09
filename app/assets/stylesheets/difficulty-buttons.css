@@ -1,0 +1,25 @@
+body > main > section > ul > li > a {
+  width: 180px;
+}
+
+body > main > section > ul > li.selected > a {
+  background-color: #6C757D;
+  color: white;
+  cursor: default;
+}
+
+body > main > section > ul > li.selected > a:hover {
+  background-color: #6C757D;
+  color: white;
+}
+
+@media screen and (max-width: 767px) {
+  body > main > section > ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  body > main > section > ul > li {
+    margin: 8px 0;
+  }    
+}

@@ -3,15 +3,16 @@ import { useEffect, useState } from "react";
 const path = window.location.pathname;
 const difficulty = path === '/' ? 'easy' : path.slice(6).toLowerCase();
 const isValidGamePage = ['easy', 'medium', 'hard'].includes(difficulty);
+const bombProbability = 0.125;
 
 const boardSizes = {
-  'easy': [9, 9, 0.123],
-  'medium': [16, 16, 0.125],
-  'hard': [30, 16, 0.125]
+  'easy': [9, 9],
+  'medium': [16, 16],
+  'hard': [30, 16]
 }
 
 function createBombArray() {
-  return Array.from({ length: boardSizes[difficulty][0] }, () => Math.random() < boardSizes[difficulty][2] ? 'B' : '');
+  return Array.from({ length: boardSizes[difficulty][0] }, () => Math.random() < bombProbability ? 'B' : '');
 }
 
 const Board = () => {
