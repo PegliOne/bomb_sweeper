@@ -28,7 +28,7 @@ const Board = () => {
 
   if (isValidGamePage) {
     return (
-      <section className="board">
+      <section className={`board ${ difficulty === 'hard' ? 'large' : ''}`}>
         { bombMatrix.map((row, index) => {
           return (
             <div key={index}>

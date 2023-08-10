@@ -30,7 +30,9 @@ body > header > nav > ul > li.selected > a:hover {
       width: 100%;
   }
   
+  body > header > nav > ul > li > h1,
   body > header > nav > ul > li > a {
-    text-align: left;
+    width: 100%;
+    justify-content: center;
   }  
 }

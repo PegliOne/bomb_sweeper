@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   include ApplicationHelper
+  before_action :check_user_logged_in, only: [:show]
+  before_action :check_user_not_logged_in, only: [:new, :create]
   
   def new
     @user = User.new
