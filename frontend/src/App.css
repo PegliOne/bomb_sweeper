@@ -1,27 +1,10 @@
-/* Board Styles */
-
 section.board {
   border: 1px solid black;
 }
 
-@media screen and (max-width: 767px) {
-  section.board.large {
-    margin: 200px 0;
-    transform: rotate(90deg);
-  }   
-  
-  section.board.large > div > div {
-    transform: rotate(-90deg);
-  }
-}
-
-/* Row Styles */
-
 section.board > div {
   display: flex;
 }
-
-/* Square Styles */
 
 section.board > div > div {
   display: flex;
@@ -31,4 +14,17 @@ section.board > div > div {
   height: 28px;
   border: 1px solid black;
   color: #8B0000;
+}
+
+/* Mobile Styles */
+
+@media screen and (max-width: 860px) {
+  section.board.large {
+    margin: 200px 0;
+    transform: rotate(90deg);
+  }   
+  
+  section.board.large > div > div {
+    transform: rotate(-90deg);
+  }
 }
