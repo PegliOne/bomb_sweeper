@@ -3,7 +3,14 @@ import Board from './components/Board'
 
 function App() {
   return (
-    <Board/>
+    <div>
+      <Board/>
+      <p class="timer">
+        <span>Timer:</span> 00:00
+        <button>Reset</button>
+        <button>Submit</button>
+      </p>
+    </div>
   );
 }
 

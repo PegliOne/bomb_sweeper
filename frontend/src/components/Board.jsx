@@ -12,7 +12,51 @@ const boardSizes = {
 }
 
 function createBombArray() {
-  return Array.from({ length: boardSizes[difficulty][0] }, () => Math.random() < bombProbability ? 'B' : '');
+  return Array.from({ length: boardSizes[difficulty][0] }, () => Math.random() < bombProbability ? { hasBomb: true } : { hasBomb: false });
+}
+
+function checkIfNextToBomb(bombMatrix, horIndex, verIndex) {
+  const testLocations = [
+    {
+      xCor: horIndex - 1,
+      yCor: verIndex - 1
+    },
+    {
+      xCor: horIndex ,
+      yCor: verIndex - 1
+    },
+    {
+      xCor: horIndex + 1,
+      yCor: verIndex - 1
+    },
+    {
+      xCor: horIndex - 1,
+      yCor: verIndex
+    },
+    {
+      xCor: horIndex + 1,
+      yCor: verIndex
+    },
+    {
+      xCor: horIndex - 1,
+      yCor: verIndex + 1
+    },
+    {
+      xCor: horIndex,
+      yCor: verIndex + 1
+    },
+    {
+      xCor: horIndex + 1,
+      yCor: verIndex + 1
+    },
+  ];
+  const validTestLocations = testLocations.filter((location) => location.xCor > -1 && location.xCor < boardSizes[difficulty][0] && location.yCor > -1 && location.yCor < boardSizes[difficulty][1]);
+  const nextToBomb = !validTestLocations.every((location) => !bombMatrix[location.yCor][location.xCor].hasBomb);
+  return nextToBomb;
+}
+
+function renderSquare(square) {
+  return square.hasBomb ? 'B' : '';
 }
 
 const Board = () => {
@@ -29,12 +73,12 @@ const Board = () => {
   if (isValidGamePage) {
     return (
       <section className={`board ${ difficulty === 'hard' ? 'large' : ''}`}>
-        { bombMatrix.map((row, index) => {
+        { bombMatrix.map((row, verIndex) => {
           return (
-            <div key={index}>
-              { row.map((square, index) => {
+            <div key={verIndex}>
+              { row.map((square, horIndex) => {
                 return (
-                  <div key={index}>{square}</div>
+                  <div key={horIndex}>{ square.hasBomb ? 'B' : checkIfNextToBomb(bombMatrix, horIndex, verIndex) ? 'N' : '' }</div>
                 )  
               })}
             </div>

@@ -1,4 +1,5 @@
 section.board {
+  width: min-content;
   border: 1px solid black;
 }
 
@@ -15,6 +16,30 @@ section.board > div > div {
   border: 1px solid black;
   color: #8B0000;
 }
+
+p.timer {
+  margin-top: 20px;
+  text-align: center;
+}
+
+p.timer > button {
+  margin-left: 12px;
+  padding: 4px 12px;
+  background-color: #212529;
+  color: white;
+  border: none;
+  border-radius: 8px;
+}
+
+p.timer > button:hover {
+  background-color: #6C757D;
+}
+
+p.timer > span {
+  font-weight: 600;
+}
+
+background-color: #6C757D;
 
 /* Mobile Styles */
 
