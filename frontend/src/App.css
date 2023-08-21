@@ -39,8 +39,6 @@ p.timer > span {
   font-weight: 600;
 }
 
-background-color: #6C757D;
-
 /* Mobile Styles */
 
 @media screen and (max-width: 860px) {
