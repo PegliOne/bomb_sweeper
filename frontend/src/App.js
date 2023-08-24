@@ -5,7 +5,7 @@ function App() {
   return (
     <div>
       <Board/>
-      <p class="timer">
+      <p className="timer">
         <span>Timer:</span> 00:00
         <button>Reset</button>
         <button>Submit</button>
