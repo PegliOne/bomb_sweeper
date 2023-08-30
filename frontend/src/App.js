@@ -1,15 +1,12 @@
 import "./App.css";
-import Board from "./components/Board"
+import Board from "./components/Board";
+import Timer from "./components/Timer";
 
 function App() {
   return (
     <div>
-      <Board/>
-      <p className="timer">
-        <span>Timer:</span> 00:00
-        <button>Reset</button>
-        <button>Submit</button>
-      </p>
+      <Board />
+      <Timer />
     </div>
   );
 }
