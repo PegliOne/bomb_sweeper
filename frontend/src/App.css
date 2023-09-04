@@ -17,6 +17,19 @@ section.board > div > div {
   color: #8B0000;
 }
 
+section.board > div > div.clickable {
+  background-color: rgb(25, 135, 84);
+}
+
+section.board > div > div.clickable:hover {
+  background-color: white;
+  cursor: pointer;
+}
+
+section.board > div > div.clickable span {
+  opacity: 0;
+}
+
 p.timer {
   margin-top: 20px;
   text-align: center;

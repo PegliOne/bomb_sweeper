@@ -17,7 +17,7 @@ function checkValidLocation(location) {
 }
 
 function createBombArray() {
-  return Array.from({ length: boardSizes[difficulty][0] }, () => Math.random() < bombProbability ? { hasBomb: true } : { hasBomb: false });
+  return Array.from({ length: boardSizes[difficulty][0] }, () => Math.random() < bombProbability ? { hasBomb: true, isClicked: false } : { hasBomb: false, isClicked: false });
 }
 
 function countBombs(bombMatrix, horIndex, verIndex) {
@@ -81,8 +81,21 @@ const Board = () => {
             <div key={verIndex}>
               { row.map((square, horIndex) => {
                 return (
-                  <div key={horIndex}>{ square.hasBomb ? <Bomb /> : countBombs(bombMatrix, horIndex, verIndex) === 0 ? "" : countBombs(bombMatrix, horIndex, verIndex) }</div>
-                )  
+                  <div
+                    key={horIndex}
+                    className={!square.isClicked && "clickable"}
+                  >
+                    <span>
+                      {square.hasBomb ? (
+                        <Bomb />
+                      ) : countBombs(bombMatrix, horIndex, verIndex) === 0 ? (
+                        ""
+                      ) : (
+                        countBombs(bombMatrix, horIndex, verIndex)
+                      )}
+                    </span>
+                  </div>
+                );  
               })}
             </div>
           )
