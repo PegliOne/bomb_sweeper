@@ -14,19 +14,19 @@ section.board > div > div {
   width: 28px;
   height: 28px;
   border: 1px solid black;
-  color: #8B0000;
+  color: #8b0000;
 }
 
-section.board > div > div.clickable {
+section.board > div > div.hidden {
   background-color: rgb(25, 135, 84);
 }
 
-section.board > div > div.clickable:hover {
-  background-color: white;
+section.board > div > div.hidden:hover {
+  background-color: rgb(30, 167, 103);
   cursor: pointer;
 }
 
-section.board > div > div.clickable span {
+section.board > div > div.hidden span {
   opacity: 0;
 }
 
@@ -45,7 +45,7 @@ p.timer > button {
 }
 
 p.timer > button:hover {
-  background-color: #6C757D;
+  background-color: #6c757d;
 }
 
 p.timer > span {
@@ -58,8 +58,8 @@ p.timer > span {
   section.board.large {
     margin: 200px 0;
     transform: rotate(90deg);
-  }   
-  
+  }
+
   section.board.large > div > div {
     transform: rotate(-90deg);
   }
