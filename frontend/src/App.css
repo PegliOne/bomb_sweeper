@@ -31,7 +31,6 @@ section.board > div > div.hidden span {
 }
 
 p.timer {
-  margin-top: 20px;
   text-align: center;
 }
 
@@ -50,6 +49,26 @@ p.timer > button:hover {
 
 p.timer > span {
   font-weight: 600;
+}
+
+div.results-container {
+  height: 24px;
+  margin: 24px 0;
+}
+
+div.results-container p.results {
+  margin: 0;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+div.results-container p.results.win {
+  color: darkgreen;
+}
+
+div.results-container p.results.lose {
+  color: darkred;
 }
 
 /* Mobile Styles */
