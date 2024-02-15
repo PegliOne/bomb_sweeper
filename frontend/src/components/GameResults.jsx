@@ -1,5 +1,4 @@
 const GameResults = ({ gameWon }) => {
-  console.log(gameWon);
   const results = gameWon
     ? "Congradulations! You Win."
     : "Bomb Clicked. Game Over!";

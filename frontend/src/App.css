@@ -51,6 +51,16 @@ p.timer > span {
   font-weight: 600;
 }
 
+p.timer > span.timer-text {
+  margin-right: 4px;
+}
+
+p.timer > span > span.timer-time {
+  display: inline-block;
+  width: 20px;
+  font-weight: 500;
+}
+
 div.results-container {
   height: 24px;
   margin: 24px 0;
