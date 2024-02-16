@@ -1,16 +1,4 @@
-import { useState, useEffect } from "react";
-
-const Timer = () => {
-  const [seconds, setSeconds] = useState(0);
-
-  useEffect(() => {
-    const startTime = new Date();
-
-    setInterval(() => {
-      setSeconds(Math.floor((new Date() - startTime) / 1000));
-    }, 1000);
-  }, []);
-
+const Timer = ({ seconds, resetTimer }) => {
   return (
     <p className="timer">
       <span className="timer-text">Timer:</span>
@@ -25,7 +13,7 @@ const Timer = () => {
           {seconds % 60 < 10 ? "0" + (seconds % 60) : seconds % 60}
         </span>
       </span>
-      <button>Reset</button>
+      <button onClick={resetTimer}>Reset</button>
       <button>Submit</button>
     </p>
   );

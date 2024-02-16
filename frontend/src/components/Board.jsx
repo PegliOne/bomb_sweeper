@@ -75,7 +75,7 @@ function countBombs(bombMatrix, horIndex, verIndex) {
   return bombCount;
 }
 
-const Board = () => {
+const Board = ({ startTimer }) => {
   const [bombMatrix, setBombMatrix] = useState([]);
 
   useEffect(() => {
@@ -96,7 +96,10 @@ const Board = () => {
 
   if (isValidGamePage) {
     return (
-      <section className={`board ${difficulty === "hard" ? "large" : ""}`}>
+      <section
+        className={`board ${difficulty === "hard" ? "large" : ""}`}
+        onClick={startTimer}
+      >
         {bombMatrix.map((row, verIndex) => {
           return (
             <div key={verIndex}>
