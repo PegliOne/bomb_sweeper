@@ -75,7 +75,7 @@ function countBombs(bombMatrix, horIndex, verIndex) {
   return bombCount;
 }
 
-const Board = ({ startTimer }) => {
+const Board = ({ startTimer, endGame }) => {
   const [bombMatrix, setBombMatrix] = useState([]);
 
   useEffect(() => {
@@ -90,6 +90,10 @@ const Board = ({ startTimer }) => {
 
   function handleSquareClick(horIndex, verIndex) {
     let newBombMatrix = [...bombMatrix];
+    const clickedSquare = newBombMatrix[verIndex][horIndex];
+    if (clickedSquare.hasBomb) {
+      endGame();
+    }
     newBombMatrix[verIndex][horIndex].isClicked = true;
     setBombMatrix(newBombMatrix);
   }
