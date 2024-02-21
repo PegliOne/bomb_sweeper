@@ -1,4 +1,4 @@
-const Timer = ({ seconds, resetTimer }) => {
+const Timer = ({ seconds, resetGame }) => {
   return (
     <p className="timer">
       <span className="timer-text">Timer:</span>
@@ -13,7 +13,7 @@ const Timer = ({ seconds, resetTimer }) => {
           {seconds % 60 < 10 ? "0" + (seconds % 60) : seconds % 60}
         </span>
       </span>
-      <button onClick={resetTimer}>Reset</button>
+      <button onClick={resetGame}>Reset</button>
       <button>Submit</button>
     </p>
   );
