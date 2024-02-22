@@ -47,10 +47,6 @@ function App() {
     setTimerRunning(false);
   }
 
-  function endGame() {
-    setGameOver(true);
-  }
-
   function resetGame() {
     setGameOver(false);
     resetTimer();
@@ -121,10 +117,14 @@ function App() {
   }
 
   function handleSquareClick(horIndex, verIndex) {
+    if (gameOver) {
+      return;
+    }
     let newBombMatrix = [...bombMatrix];
     const clickedSquare = newBombMatrix[verIndex][horIndex];
     if (clickedSquare.hasBomb) {
-      endGame();
+      setGameOver(true);
+      clearInterval(timerInterval);
     }
     newBombMatrix[verIndex][horIndex].isClicked = true;
     setBombMatrix(newBombMatrix);
