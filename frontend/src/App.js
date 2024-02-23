@@ -5,7 +5,7 @@ import GameResults from "./components/GameResults";
 import Timer from "./components/Timer";
 
 function App() {
-  const bombProbability = 0.125;
+  const bombProbability = 0;
   const path = window.location.pathname;
   const difficulty = path === "/" ? "easy" : path.slice(6).toLowerCase();
   const isValidGamePage = ["easy", "medium", "hard"].includes(difficulty);
@@ -14,6 +14,7 @@ function App() {
   const [timerRunning, setTimerRunning] = useState(false);
   const [timerInterval, setTimerInterval] = useState(null);
   const [gameOver, setGameOver] = useState(false);
+  const [gameWon, setGameWon] = useState(false);
   const [bombMatrix, setBombMatrix] = useState([]);
 
   const boardSizes = {
@@ -124,9 +125,25 @@ function App() {
     const clickedSquare = newBombMatrix[verIndex][horIndex];
     if (clickedSquare.hasBomb) {
       setGameOver(true);
+      setGameWon(false);
       clearInterval(timerInterval);
     }
+
     newBombMatrix[verIndex][horIndex].isClicked = true;
+
+    const noBombRows = newBombMatrix.filter((row) => {
+      const noBombSquares = row.filter(
+        (square) => !square.hasBomb && !square.isClicked
+      );
+      return noBombSquares.length > 0;
+    });
+
+    if (noBombRows.length < 1) {
+      setGameOver(true);
+      setGameWon(true);
+      clearInterval(timerInterval);
+    }
+
     setBombMatrix(newBombMatrix);
   }
 
@@ -156,7 +173,7 @@ function App() {
         />
       )}
       <div className="results-container">
-        {gameOver && <GameResults gameWon={false} />}
+        {gameOver && <GameResults gameWon={gameWon} />}
       </div>
       <Timer seconds={seconds} resetGame={resetGame} />
     </div>

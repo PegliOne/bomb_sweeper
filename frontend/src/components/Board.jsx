@@ -19,7 +19,7 @@ const Board = ({
               return (
                 <div
                   key={horIndex}
-                  className={!square.isClicked && "hidden"}
+                  className={!square.isClicked ? "hidden" : ""}
                   onClick={() => handleSquareClick(horIndex, verIndex)}
                 >
                   <span>
