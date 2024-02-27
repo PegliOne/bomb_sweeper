@@ -5,7 +5,7 @@ import GameResults from "./components/GameResults";
 import Timer from "./components/Timer";
 
 function App() {
-  const bombProbability = 0;
+  const bombProbability = 0.125;
   const path = window.location.pathname;
   const difficulty = path === "/" ? "easy" : path.slice(6).toLowerCase();
   const isValidGamePage = ["easy", "medium", "hard"].includes(difficulty);
@@ -170,6 +170,7 @@ function App() {
           countBombs={countBombs}
           handleSquareClick={handleSquareClick}
           startTimer={startTimer}
+          isActive={!gameOver}
         />
       )}
       <div className="results-container">

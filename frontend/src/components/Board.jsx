@@ -6,6 +6,7 @@ const Board = ({
   handleSquareClick,
   startTimer,
   countBombs,
+  isActive,
 }) => {
   return (
     <section
@@ -19,7 +20,9 @@ const Board = ({
               return (
                 <div
                   key={horIndex}
-                  className={!square.isClicked ? "hidden" : ""}
+                  className={`${!square.isClicked ? "hidden" : ""} ${
+                    isActive ? "clickable" : ""
+                  }`}
                   onClick={() => handleSquareClick(horIndex, verIndex)}
                 >
                   <span>
