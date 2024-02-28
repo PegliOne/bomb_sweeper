@@ -13,7 +13,7 @@ function App() {
   const [seconds, setSeconds] = useState(0);
   const [timerRunning, setTimerRunning] = useState(false);
   const [timerInterval, setTimerInterval] = useState(null);
-  const [gameOver, setGameOver] = useState(false);
+  const [gameComplete, setGameComplete] = useState(false);
   const [gameWon, setGameWon] = useState(false);
   const [bombMatrix, setBombMatrix] = useState([]);
 
@@ -49,13 +49,13 @@ function App() {
   }
 
   function endGame(timerInterval) {
-    setGameOver(true);
+    setGameComplete(true);
     clearInterval(timerInterval);
     setTimerRunning(false);
   }
 
   function resetGame() {
-    setGameOver(false);
+    setGameComplete(false);
     resetTimer();
     createBoard(isValidGamePage, boardSizes, difficulty);
   }
@@ -124,7 +124,7 @@ function App() {
   }
 
   function handleSquareClick(horIndex, verIndex) {
-    if (gameOver) {
+    if (gameComplete) {
       return;
     }
     let newBombMatrix = [...bombMatrix];
@@ -174,11 +174,11 @@ function App() {
           countBombs={countBombs}
           handleSquareClick={handleSquareClick}
           startTimer={startTimer}
-          isActive={!gameOver}
+          isActive={!gameComplete}
         />
       )}
       <div className="results-container">
-        {gameOver && <GameResults gameWon={gameWon} />}
+        {gameComplete && <GameResults gameWon={gameWon} />}
       </div>
       <Timer seconds={seconds} resetGame={resetGame} />
     </div>
