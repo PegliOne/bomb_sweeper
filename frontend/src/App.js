@@ -44,7 +44,13 @@ function App() {
     }
 
     clearInterval(timerInterval);
+    setTimerRunning(false);
     setSeconds(0);
+  }
+
+  function endGame(timerInterval) {
+    setGameOver(true);
+    clearInterval(timerInterval);
     setTimerRunning(false);
   }
 
@@ -124,9 +130,8 @@ function App() {
     let newBombMatrix = [...bombMatrix];
     const clickedSquare = newBombMatrix[verIndex][horIndex];
     if (clickedSquare.hasBomb) {
-      setGameOver(true);
       setGameWon(false);
-      clearInterval(timerInterval);
+      endGame(timerInterval);
     }
 
     newBombMatrix[verIndex][horIndex].isClicked = true;
@@ -139,9 +144,8 @@ function App() {
     });
 
     if (noBombRows.length < 1) {
-      setGameOver(true);
       setGameWon(true);
-      clearInterval(timerInterval);
+      endGame(timerInterval);
     }
 
     setBombMatrix(newBombMatrix);
