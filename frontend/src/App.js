@@ -13,7 +13,8 @@ function App() {
   const [seconds, setSeconds] = useState(0);
   const [timerRunning, setTimerRunning] = useState(false);
   const [timerInterval, setTimerInterval] = useState(null);
-  const [gameOver, setGameOver] = useState(false);
+  const [gameComplete, setGameComplete] = useState(false);
+  const [gameWon, setGameWon] = useState(false);
   const [bombMatrix, setBombMatrix] = useState([]);
 
   const boardSizes = {
@@ -38,17 +39,19 @@ function App() {
   }
 
   function resetTimer() {
-    if (!timerRunning) {
-      return;
-    }
-
     clearInterval(timerInterval);
+    setTimerRunning(false);
     setSeconds(0);
+  }
+
+  function endGame(timerInterval) {
+    setGameComplete(true);
+    clearInterval(timerInterval);
     setTimerRunning(false);
   }
 
   function resetGame() {
-    setGameOver(false);
+    setGameComplete(false);
     resetTimer();
     createBoard(isValidGamePage, boardSizes, difficulty);
   }
@@ -117,16 +120,30 @@ function App() {
   }
 
   function handleSquareClick(horIndex, verIndex) {
-    if (gameOver) {
+    if (gameComplete) {
       return;
     }
     let newBombMatrix = [...bombMatrix];
     const clickedSquare = newBombMatrix[verIndex][horIndex];
     if (clickedSquare.hasBomb) {
-      setGameOver(true);
-      clearInterval(timerInterval);
+      setGameWon(false);
+      endGame(timerInterval);
     }
+
     newBombMatrix[verIndex][horIndex].isClicked = true;
+
+    const noBombRows = newBombMatrix.filter((row) => {
+      const noBombSquares = row.filter(
+        (square) => !square.hasBomb && !square.isClicked
+      );
+      return noBombSquares.length > 0;
+    });
+
+    if (noBombRows.length < 1) {
+      setGameWon(true);
+      endGame(timerInterval);
+    }
+
     setBombMatrix(newBombMatrix);
   }
 
@@ -153,10 +170,11 @@ function App() {
           countBombs={countBombs}
           handleSquareClick={handleSquareClick}
           startTimer={startTimer}
+          isActive={!gameComplete}
         />
       )}
       <div className="results-container">
-        {gameOver && <GameResults gameWon={false} />}
+        {gameComplete && <GameResults gameWon={gameWon} />}
       </div>
       <Timer seconds={seconds} resetGame={resetGame} />
     </div>
