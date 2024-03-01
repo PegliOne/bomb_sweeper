@@ -39,10 +39,6 @@ function App() {
   }
 
   function resetTimer() {
-    if (!timerRunning) {
-      return;
-    }
-
     clearInterval(timerInterval);
     setTimerRunning(false);
     setSeconds(0);
