@@ -1,15 +1,11 @@
 <h1>Sign Up</h1>
 
 <section class="mt-4">
-  <p>Information about the benefits of creating an account and logging in</p>
+  <p class="text-center">With a BombSweeper account you can</p>
 
-  <p>Information about the benefits of creating an account and logging in</p>
+  <%= render partial: "shared/account_features_list" %>
 
-  <p>Information about the benefits of creating an account and logging in</p>
-
-  <p>Information about the benefits of creating an account and logging in</p>
-
-  <p>Information about the benefits of creating an account and logging in</p>
+  <p class="text-center">Sign up today!</p>
 </section> 
 
 <%= render partial: "shared/forms/form", locals: { type: "Sign Up", model: @user, path: sign_up_path } %>
