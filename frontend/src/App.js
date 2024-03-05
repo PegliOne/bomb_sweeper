@@ -161,9 +161,13 @@ function App() {
     createBoard(isValidGamePage, boardSizes, difficulty);
   }, []);
 
+  if (!isValidGamePage) {
+    return;
+  }
+
   return (
     <div>
-      {isValidGamePage && (
+      <div>
         <Board
           difficulty={difficulty}
           bombMatrix={bombMatrix}
@@ -172,11 +176,11 @@ function App() {
           startTimer={startTimer}
           isActive={!gameComplete}
         />
-      )}
-      <div className="results-container">
-        {gameComplete && <GameResults gameWon={gameWon} />}
+        <div className="results-container">
+          {gameComplete && <GameResults gameWon={gameWon} />}
+        </div>
+        <Timer seconds={seconds} resetGame={resetGame} />
       </div>
-      <Timer seconds={seconds} resetGame={resetGame} />
     </div>
   );
 }
