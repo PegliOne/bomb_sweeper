@@ -8,4 +8,4 @@
   <p class="text-center">If you don't have an account, sign up <%= link_to "here", sign_up_path %></p>
 </section>  
 
-<%= render partial: "shared/forms/form", locals: { type: "Log In", model: @user, path: log_in_path } %>
+<%= render partial: "shared/forms/form", locals: { type: "Log In", model: @user, path: log_in_path, error_message: "Email or password incorrect" } %>

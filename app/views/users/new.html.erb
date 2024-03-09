@@ -8,4 +8,4 @@
   <p class="text-center">Sign up today!</p>
 </section> 
 
-<%= render partial: "shared/forms/form", locals: { type: "Sign Up", model: @user, path: sign_up_path } %>
+<%= render partial: "shared/forms/form", locals: { type: "Sign Up", model: @user, path: sign_up_path, error_message: "User registration could not be completed" } %>
