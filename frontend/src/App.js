@@ -5,7 +5,7 @@ import GameResults from "./components/GameResults";
 import Timer from "./components/Timer";
 
 function App() {
-  const bombProbability = 0.125;
+  const bombProbability = 0;
   const path = window.location.pathname;
   const difficulty = path === "/" ? "easy" : path.slice(6).toLowerCase();
   const isValidGamePage = ["easy", "medium", "hard"].includes(difficulty);
@@ -167,7 +167,7 @@ function App() {
 
   return (
     <div>
-      <div>
+      <div className="game-container">
         <Board
           difficulty={difficulty}
           bombMatrix={bombMatrix}
@@ -179,7 +179,7 @@ function App() {
         <div className="results-container">
           {gameComplete && <GameResults gameWon={gameWon} />}
         </div>
-        <Timer seconds={seconds} resetGame={resetGame} />
+        <Timer seconds={seconds} resetGame={resetGame} gameWon={true} />
       </div>
     </div>
   );
