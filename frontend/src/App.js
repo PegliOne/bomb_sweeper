@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Board from "./components/Board";
 import GameResults from "./components/GameResults";
 import Timer from "./components/Timer";
+import { addGame } from "./services/play-service";
 
 function App() {
   const bombProbability = 0;
@@ -157,6 +158,15 @@ function App() {
     setBombMatrix(bombMatrix);
   }
 
+  function submitTime(seconds) {
+    const game = {
+      difficulty: difficulty,
+      gameWon: true,
+      seconds: seconds,
+    };
+    addGame(game);
+  }
+
   useEffect(() => {
     createBoard(isValidGamePage, boardSizes, difficulty);
   }, []);
@@ -179,7 +189,12 @@ function App() {
         <div className="results-container">
           {gameComplete && <GameResults gameWon={gameWon} />}
         </div>
-        <Timer seconds={seconds} resetGame={resetGame} gameWon={true} />
+        <Timer
+          seconds={seconds}
+          resetGame={resetGame}
+          gameWon={gameWon}
+          submitTime={submitTime}
+        />
       </div>
     </div>
   );
