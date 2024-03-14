@@ -66,15 +66,7 @@ function App() {
     );
   }
 
-  function createBombArray() {
-    return Array.from({ length: boardSizes[difficulty][0] }, () =>
-      Math.random() < bombProbability
-        ? { hasBomb: true, isClicked: false }
-        : { hasBomb: false, isClicked: false }
-    );
-  }
-
-  function countBombs(bombMatrix, horIndex, verIndex) {
+  function getSurroundingLocations(horIndex, verIndex) {
     const testLocations = [
       {
         xCor: horIndex - 1,
@@ -110,10 +102,20 @@ function App() {
       },
     ];
 
-    const validTestLocations = testLocations.filter((location) =>
-      checkValidLocation(location)
+    return testLocations.filter((location) => checkValidLocation(location));
+  }
+
+  function createBombArray() {
+    return Array.from({ length: boardSizes[difficulty][0] }, () =>
+      Math.random() < bombProbability
+        ? { hasBomb: true, isClicked: false }
+        : { hasBomb: false, isClicked: false }
     );
-    const bombCount = validTestLocations.filter(
+  }
+
+  function countBombs(bombMatrix, horIndex, verIndex) {
+    const surroundingLocations = getSurroundingLocations(horIndex, verIndex);
+    const bombCount = surroundingLocations.filter(
       (location) => bombMatrix[location.yCor][location.xCor].hasBomb
     ).length;
 
@@ -126,6 +128,11 @@ function App() {
     }
     let newBombMatrix = [...bombMatrix];
     const clickedSquare = newBombMatrix[verIndex][horIndex];
+
+    if (clickedSquare.isClicked) {
+      return;
+    }
+
     if (clickedSquare.hasBomb) {
       setPlayWon(false);
       endPlay(timerInterval);
@@ -146,6 +153,13 @@ function App() {
     }
 
     setBombMatrix(newBombMatrix);
+
+    if (countBombs(bombMatrix, horIndex, verIndex) === 0) {
+      const surroundingLocations = getSurroundingLocations(horIndex, verIndex);
+      surroundingLocations.forEach((location) =>
+        handleSquareClick(location.xCor, location.yCor)
+      );
+    }
   }
 
   function createBoard(isValidGamePage, boardSizes, difficulty) {
