@@ -1,12 +1,12 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import Board from "./components/Board";
-import GameResults from "./components/GameResults";
+import Results from "./components/Results";
 import Timer from "./components/Timer";
-import { addGame } from "./services/play-service";
+import { addPlay } from "./services/play-service";
 
 function App() {
-  const bombProbability = 0;
+  const bombProbability = 0.125;
   const path = window.location.pathname;
   const difficulty = path === "/" ? "easy" : path.slice(6).toLowerCase();
   const isValidGamePage = ["easy", "medium", "hard"].includes(difficulty);
@@ -14,8 +14,8 @@ function App() {
   const [seconds, setSeconds] = useState(0);
   const [timerRunning, setTimerRunning] = useState(false);
   const [timerInterval, setTimerInterval] = useState(null);
-  const [gameComplete, setGameComplete] = useState(false);
-  const [gameWon, setGameWon] = useState(false);
+  const [playComplete, setPlayComplete] = useState(false);
+  const [playWon, setPlayWon] = useState(false);
   const [bombMatrix, setBombMatrix] = useState([]);
 
   const boardSizes = {
@@ -45,14 +45,14 @@ function App() {
     setSeconds(0);
   }
 
-  function endGame(timerInterval) {
-    setGameComplete(true);
+  function endPlay(timerInterval) {
+    setPlayComplete(true);
     clearInterval(timerInterval);
     setTimerRunning(false);
   }
 
-  function resetGame() {
-    setGameComplete(false);
+  function resetPlay() {
+    setPlayComplete(false);
     resetTimer();
     createBoard(isValidGamePage, boardSizes, difficulty);
   }
@@ -121,14 +121,14 @@ function App() {
   }
 
   function handleSquareClick(horIndex, verIndex) {
-    if (gameComplete) {
+    if (playComplete) {
       return;
     }
     let newBombMatrix = [...bombMatrix];
     const clickedSquare = newBombMatrix[verIndex][horIndex];
     if (clickedSquare.hasBomb) {
-      setGameWon(false);
-      endGame(timerInterval);
+      setPlayWon(false);
+      endPlay(timerInterval);
     }
 
     newBombMatrix[verIndex][horIndex].isClicked = true;
@@ -141,8 +141,8 @@ function App() {
     });
 
     if (noBombRows.length < 1) {
-      setGameWon(true);
-      endGame(timerInterval);
+      setPlayWon(true);
+      endPlay(timerInterval);
     }
 
     setBombMatrix(newBombMatrix);
@@ -159,12 +159,12 @@ function App() {
   }
 
   function submitTime(seconds) {
-    const game = {
+    const play = {
       difficulty: difficulty,
-      gameWon: true,
+      playWon: true,
       seconds: seconds,
     };
-    addGame(game);
+    addPlay(play);
   }
 
   useEffect(() => {
@@ -184,15 +184,15 @@ function App() {
           countBombs={countBombs}
           handleSquareClick={handleSquareClick}
           startTimer={startTimer}
-          isActive={!gameComplete}
+          isActive={!playComplete}
         />
         <div className="results-container">
-          {gameComplete && <GameResults gameWon={gameWon} />}
+          {playComplete && <Results playWon={playWon} />}
         </div>
         <Timer
           seconds={seconds}
-          resetGame={resetGame}
-          gameWon={gameWon}
+          resetPlay={resetPlay}
+          playWon={playWon}
           submitTime={submitTime}
         />
       </div>

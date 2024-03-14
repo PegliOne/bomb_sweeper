@@ -1,7 +1,7 @@
-export const addGame = (game) => {
-  const storedGames = localStorage.getItem("games") ?? "";
-  const games = storedGames ? JSON.parse(storedGames) : new Array();
-  games.push(game);
-  localStorage.setItem("games", JSON.stringify(games));
-  console.log(localStorage.getItem("games"));
+export const addPlay = (play) => {
+  const storedPlays = localStorage.getItem("plays") ?? "";
+  const plays = storedPlays ? JSON.parse(storedPlays) : new Array();
+  plays.push(play);
+  localStorage.setItem("plays", JSON.stringify(plays));
+  console.log(localStorage.getItem("plays"));
 };

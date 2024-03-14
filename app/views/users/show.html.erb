@@ -13,7 +13,7 @@
   </div>
 </section>
 
-<p class="mb-0">You have won the following games.</p>
+<p class="mb-0">You have won <%= @win_count%> times(s).</p>
 
 <%= render partial: "shared/score_tables/score_tables", locals: {easy_plays: @easy_plays, medium_plays: @medium_plays, hard_plays: @hard_plays} %>
 
