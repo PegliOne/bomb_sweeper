@@ -1,3 +1,9 @@
+div.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 section.board {
   width: min-content;
   border: 1px solid black;
@@ -31,10 +37,12 @@ section.board > div > div.hidden span {
 }
 
 p.timer {
-  text-align: center;
+  display: flex;
+  align-items: center;
 }
 
-p.timer > button {
+p.timer > button,
+p.timer > div > button {
   margin-left: 12px;
   padding: 4px 12px;
   background-color: #212529;
@@ -43,9 +51,14 @@ p.timer > button {
   border-radius: 8px;
 }
 
-p.timer > button:hover {
+p.timer > button:hover,
+p.timer > div > button:hover {
   background-color: #6c757d;
   cursor: pointer;
+}
+
+p.timer > div.timer-submit {
+  width: 140px;
 }
 
 p.timer > span {

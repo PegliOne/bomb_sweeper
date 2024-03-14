@@ -1,8 +1,9 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import Board from "./components/Board";
-import GameResults from "./components/GameResults";
+import Results from "./components/Results";
 import Timer from "./components/Timer";
+import { addPlay } from "./services/play-service";
 
 function App() {
   const bombProbability = 0.125;
@@ -13,8 +14,8 @@ function App() {
   const [seconds, setSeconds] = useState(0);
   const [timerRunning, setTimerRunning] = useState(false);
   const [timerInterval, setTimerInterval] = useState(null);
-  const [gameComplete, setGameComplete] = useState(false);
-  const [gameWon, setGameWon] = useState(false);
+  const [playComplete, setPlayComplete] = useState(false);
+  const [playWon, setPlayWon] = useState(false);
   const [bombMatrix, setBombMatrix] = useState([]);
 
   const boardSizes = {
@@ -44,14 +45,14 @@ function App() {
     setSeconds(0);
   }
 
-  function endGame(timerInterval) {
-    setGameComplete(true);
+  function endPlay(timerInterval) {
+    setPlayComplete(true);
     clearInterval(timerInterval);
     setTimerRunning(false);
   }
 
-  function resetGame() {
-    setGameComplete(false);
+  function resetPlay() {
+    setPlayComplete(false);
     resetTimer();
     createBoard(isValidGamePage, boardSizes, difficulty);
   }
@@ -65,15 +66,7 @@ function App() {
     );
   }
 
-  function createBombArray() {
-    return Array.from({ length: boardSizes[difficulty][0] }, () =>
-      Math.random() < bombProbability
-        ? { hasBomb: true, isClicked: false }
-        : { hasBomb: false, isClicked: false }
-    );
-  }
-
-  function countBombs(bombMatrix, horIndex, verIndex) {
+  function getSurroundingLocations(horIndex, verIndex) {
     const testLocations = [
       {
         xCor: horIndex - 1,
@@ -109,10 +102,20 @@ function App() {
       },
     ];
 
-    const validTestLocations = testLocations.filter((location) =>
-      checkValidLocation(location)
+    return testLocations.filter((location) => checkValidLocation(location));
+  }
+
+  function createBombArray() {
+    return Array.from({ length: boardSizes[difficulty][0] }, () =>
+      Math.random() < bombProbability
+        ? { hasBomb: true, isClicked: false }
+        : { hasBomb: false, isClicked: false }
     );
-    const bombCount = validTestLocations.filter(
+  }
+
+  function countBombs(bombMatrix, horIndex, verIndex) {
+    const surroundingLocations = getSurroundingLocations(horIndex, verIndex);
+    const bombCount = surroundingLocations.filter(
       (location) => bombMatrix[location.yCor][location.xCor].hasBomb
     ).length;
 
@@ -120,14 +123,19 @@ function App() {
   }
 
   function handleSquareClick(horIndex, verIndex) {
-    if (gameComplete) {
+    if (playComplete) {
       return;
     }
     let newBombMatrix = [...bombMatrix];
     const clickedSquare = newBombMatrix[verIndex][horIndex];
+
+    if (clickedSquare.isClicked) {
+      return;
+    }
+
     if (clickedSquare.hasBomb) {
-      setGameWon(false);
-      endGame(timerInterval);
+      setPlayWon(false);
+      endPlay(timerInterval);
     }
 
     newBombMatrix[verIndex][horIndex].isClicked = true;
@@ -140,11 +148,18 @@ function App() {
     });
 
     if (noBombRows.length < 1) {
-      setGameWon(true);
-      endGame(timerInterval);
+      setPlayWon(true);
+      endPlay(timerInterval);
     }
 
     setBombMatrix(newBombMatrix);
+
+    if (countBombs(bombMatrix, horIndex, verIndex) === 0) {
+      const surroundingLocations = getSurroundingLocations(horIndex, verIndex);
+      surroundingLocations.forEach((location) =>
+        handleSquareClick(location.xCor, location.yCor)
+      );
+    }
   }
 
   function createBoard(isValidGamePage, boardSizes, difficulty) {
@@ -157,26 +172,44 @@ function App() {
     setBombMatrix(bombMatrix);
   }
 
+  function submitTime(seconds) {
+    const play = {
+      difficulty: difficulty,
+      playWon: true,
+      seconds: seconds,
+    };
+    addPlay(play);
+  }
+
   useEffect(() => {
     createBoard(isValidGamePage, boardSizes, difficulty);
   }, []);
 
+  if (!isValidGamePage) {
+    return;
+  }
+
   return (
     <div>
-      {isValidGamePage && (
+      <div className="game-container">
         <Board
           difficulty={difficulty}
           bombMatrix={bombMatrix}
           countBombs={countBombs}
           handleSquareClick={handleSquareClick}
           startTimer={startTimer}
-          isActive={!gameComplete}
+          isActive={!playComplete}
         />
-      )}
-      <div className="results-container">
-        {gameComplete && <GameResults gameWon={gameWon} />}
+        <div className="results-container">
+          {playComplete && <Results playWon={playWon} />}
+        </div>
+        <Timer
+          seconds={seconds}
+          resetPlay={resetPlay}
+          playWon={playWon}
+          submitTime={submitTime}
+        />
       </div>
-      <Timer seconds={seconds} resetGame={resetGame} />
     </div>
   );
 }
