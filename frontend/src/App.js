@@ -162,6 +162,25 @@ function App() {
     }
   }
 
+  function handleFlagClick(e, horIndex, verIndex) {
+    e.preventDefault();
+
+    if (playComplete) {
+      return;
+    }
+
+    let newBombMatrix = [...bombMatrix];
+    const clickedSquare = newBombMatrix[verIndex][horIndex];
+
+    if (clickedSquare.isClicked) {
+      return;
+    }
+
+    clickedSquare.hasFlag = true;
+
+    setBombMatrix(newBombMatrix);
+  }
+
   function createBoard(isValidGamePage, boardSizes, difficulty) {
     if (!isValidGamePage) {
       return;
@@ -197,6 +216,7 @@ function App() {
           bombMatrix={bombMatrix}
           countBombs={countBombs}
           handleSquareClick={handleSquareClick}
+          handleFlagClick={handleFlagClick}
           startTimer={startTimer}
           isActive={!playComplete}
         />

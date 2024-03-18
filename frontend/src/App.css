@@ -32,17 +32,23 @@ section.board > div > div.hidden.clickable:hover {
   cursor: pointer;
 }
 
-section.board > div > div.hidden span {
+section.board > div > div.hidden span,
+section.board > div > div.flagged span {
   opacity: 0;
 }
 
-p.timer {
+section.board > div > div.flagged {
+  background-image: url("../public/red-flag.png");
+  background-size: cover;
+}
+
+section.timer {
   display: flex;
   align-items: center;
 }
 
-p.timer > button,
-p.timer > div > button {
+section.timer > button,
+section.timer > div > button {
   margin-left: 12px;
   padding: 4px 12px;
   background-color: #212529;
@@ -51,25 +57,25 @@ p.timer > div > button {
   border-radius: 8px;
 }
 
-p.timer > button:hover,
-p.timer > div > button:hover {
+section.timer > button:hover,
+section.timer > div > button:hover {
   background-color: #6c757d;
   cursor: pointer;
 }
 
-p.timer > div.timer-submit {
+section.timer > div.timer-submit {
   width: 140px;
 }
 
-p.timer > span {
+section.timer > span {
   font-weight: 600;
 }
 
-p.timer > span.timer-text {
+section.timer > span.timer-text {
   margin-right: 4px;
 }
 
-p.timer > span > span.timer-time {
+section.timer > span > span.timer-time {
   display: inline-block;
   width: 20px;
   font-weight: 500;

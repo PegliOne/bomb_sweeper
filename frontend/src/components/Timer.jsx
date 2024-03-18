@@ -1,6 +1,6 @@
 const Timer = ({ seconds, resetPlay, playWon, submitTime }) => {
   return (
-    <p className="timer">
+    <section className="timer">
       <span className="timer-text">Timer:</span>
       <span>
         <span className="timer-time">
@@ -19,7 +19,7 @@ const Timer = ({ seconds, resetPlay, playWon, submitTime }) => {
           <button onClick={() => submitTime(seconds)}>Submit Time</button>
         )}
       </div>
-    </p>
+    </section>
   );
 };
 
