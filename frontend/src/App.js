@@ -129,7 +129,7 @@ function App() {
     let newBombMatrix = [...bombMatrix];
     const clickedSquare = newBombMatrix[verIndex][horIndex];
 
-    if (clickedSquare.isClicked) {
+    if (clickedSquare.isClicked || clickedSquare.hasFlag) {
       return;
     }
 
@@ -176,7 +176,7 @@ function App() {
       return;
     }
 
-    clickedSquare.hasFlag = true;
+    clickedSquare.hasFlag = !clickedSquare.hasFlag;
 
     setBombMatrix(newBombMatrix);
   }
