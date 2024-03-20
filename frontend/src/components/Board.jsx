@@ -4,10 +4,19 @@ const Board = ({
   difficulty,
   bombMatrix,
   handleSquareClick,
+  handleFlagClick,
   startTimer,
   countBombs,
   isActive,
 }) => {
+  function getSquareClass(square) {
+    if (square.isClicked) {
+      return "";
+    }
+
+    return square.hasFlag ? "flagged" : "hidden";
+  }
+
   return (
     <section
       className={`board ${difficulty === "hard" ? "large" : ""}`}
@@ -20,10 +29,11 @@ const Board = ({
               return (
                 <div
                   key={horIndex}
-                  className={`${!square.isClicked ? "hidden" : ""} ${
+                  className={`${getSquareClass(square)} ${
                     isActive ? "clickable" : ""
                   }`}
                   onClick={() => handleSquareClick(horIndex, verIndex)}
+                  onContextMenu={(e) => handleFlagClick(e, horIndex, verIndex)}
                 >
                   <span>
                     {square.hasBomb ? (

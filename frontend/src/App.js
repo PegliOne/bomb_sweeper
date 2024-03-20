@@ -129,16 +129,20 @@ function App() {
     let newBombMatrix = [...bombMatrix];
     const clickedSquare = newBombMatrix[verIndex][horIndex];
 
-    if (clickedSquare.isClicked) {
+    if (clickedSquare.isClicked || clickedSquare.hasFlag) {
       return;
     }
+
+    // Update this line
+
+    newBombMatrix[verIndex][horIndex].isClicked = true;
 
     if (clickedSquare.hasBomb) {
       setPlayWon(false);
       endPlay(timerInterval);
+      setBombMatrix(newBombMatrix);
+      return;
     }
-
-    newBombMatrix[verIndex][horIndex].isClicked = true;
 
     const noBombRows = newBombMatrix.filter((row) => {
       const noBombSquares = row.filter(
@@ -160,6 +164,25 @@ function App() {
         handleSquareClick(location.xCor, location.yCor)
       );
     }
+  }
+
+  function handleFlagClick(e, horIndex, verIndex) {
+    e.preventDefault();
+
+    if (playComplete) {
+      return;
+    }
+
+    let newBombMatrix = [...bombMatrix];
+    const clickedSquare = newBombMatrix[verIndex][horIndex];
+
+    if (clickedSquare.isClicked) {
+      return;
+    }
+
+    clickedSquare.hasFlag = !clickedSquare.hasFlag;
+
+    setBombMatrix(newBombMatrix);
   }
 
   function createBoard(isValidGamePage, boardSizes, difficulty) {
@@ -197,6 +220,7 @@ function App() {
           bombMatrix={bombMatrix}
           countBombs={countBombs}
           handleSquareClick={handleSquareClick}
+          handleFlagClick={handleFlagClick}
           startTimer={startTimer}
           isActive={!playComplete}
         />

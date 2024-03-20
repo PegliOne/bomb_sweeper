@@ -13,4 +13,6 @@ Rails.application.routes.draw do
   delete "/profiles/:id", to: "users#destroy", as: "user_destroy"
 
   get "/scoreboard", to: "plays#index", as: "plays"
+
+  match '*unmatched', to: 'pages#not_found', via: :all
 end
