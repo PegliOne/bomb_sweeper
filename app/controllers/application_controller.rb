@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   def check_user_not_logged_in
     redirect_to "/" unless session[:user_id].nil?
-  end 
+  end
 
   private
 
