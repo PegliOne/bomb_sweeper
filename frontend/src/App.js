@@ -133,12 +133,16 @@ function App() {
       return;
     }
 
+    // Update this line
+
+    newBombMatrix[verIndex][horIndex].isClicked = true;
+
     if (clickedSquare.hasBomb) {
       setPlayWon(false);
       endPlay(timerInterval);
+      setBombMatrix(newBombMatrix);
+      return;
     }
-
-    newBombMatrix[verIndex][horIndex].isClicked = true;
 
     const noBombRows = newBombMatrix.filter((row) => {
       const noBombSquares = row.filter(
