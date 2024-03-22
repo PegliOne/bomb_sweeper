@@ -122,6 +122,14 @@ function App() {
     return bombCount;
   }
 
+  function revealAllBombs(bombMatrix) {
+    bombMatrix.map((row) => {
+      row
+        .filter((square) => square.hasBomb)
+        .map((square) => (square.isClicked = true));
+    });
+  }
+
   function handleSquareClick(horIndex, verIndex) {
     if (playComplete) {
       return;
@@ -133,13 +141,12 @@ function App() {
       return;
     }
 
-    // Update this line
-
-    newBombMatrix[verIndex][horIndex].isClicked = true;
+    clickedSquare.isClicked = true;
 
     if (clickedSquare.hasBomb) {
       setPlayWon(false);
       endPlay(timerInterval);
+      revealAllBombs(newBombMatrix);
       setBombMatrix(newBombMatrix);
       return;
     }
