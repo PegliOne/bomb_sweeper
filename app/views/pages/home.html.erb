@@ -28,4 +28,8 @@
   </ul>
 
   <h3 class="mb-4"><%= @difficulty.capitalize %> Board</h3>
+
+  <%= button_to '/plays/Easy/true/20', method: :post, params: { difficult: "Easy", is_win: true, time_in_seconds: 20 } do %>
+    Create Play
+  <% end %>
 </section>

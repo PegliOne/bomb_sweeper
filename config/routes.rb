@@ -14,5 +14,7 @@ Rails.application.routes.draw do
 
   get "/scoreboard", to: "plays#index", as: "plays"
 
+  post "/plays/:difficulty/:is_win/:time_in_seconds", to: "plays#create"
+
   match '*unmatched', to: 'pages#not_found', via: :all
 end
