@@ -5,7 +5,6 @@ const Board = ({
   bombMatrix,
   handleSquareClick,
   handleFlagClick,
-  startTimer,
   countBombs,
   isActive,
 }) => {
@@ -18,10 +17,7 @@ const Board = ({
   }
 
   return (
-    <section
-      className={`board ${difficulty === "hard" ? "large" : ""}`}
-      onClick={startTimer}
-    >
+    <section className={`board ${difficulty === "hard" ? "large" : ""}`}>
       {bombMatrix.map((row, verIndex) => {
         return (
           <div key={verIndex}>

@@ -12,7 +12,7 @@ function App() {
   const isValidGamePage = ["easy", "medium", "hard"].includes(difficulty);
 
   const [seconds, setSeconds] = useState(0);
-  const [timerRunning, setTimerRunning] = useState(false);
+  const [playInProgress, setPlayInProgress] = useState(false);
   const [timerInterval, setTimerInterval] = useState(null);
   const [playComplete, setPlayComplete] = useState(false);
   const [playWon, setPlayWon] = useState(false);
@@ -25,11 +25,6 @@ function App() {
   };
 
   function startTimer() {
-    if (timerRunning) {
-      return;
-    }
-
-    setTimerRunning(true);
     const startTime = new Date();
 
     const timerInterval = setInterval(() => {
@@ -41,17 +36,18 @@ function App() {
 
   function resetTimer() {
     clearInterval(timerInterval);
-    setTimerRunning(false);
+    setPlayInProgress(false);
     setSeconds(0);
   }
 
   function endPlay(timerInterval) {
+    setPlayInProgress(false);
     setPlayComplete(true);
     clearInterval(timerInterval);
-    setTimerRunning(false);
   }
 
   function resetPlay() {
+    setPlayInProgress(false);
     setPlayComplete(false);
     resetTimer();
     createBoard(isValidGamePage, boardSizes, difficulty);
@@ -130,10 +126,11 @@ function App() {
     });
   }
 
-  function handleSquareClick(horIndex, verIndex) {
+  function handleSquareClick(horIndex, verIndex, isAutoClick = false) {
     if (playComplete) {
       return;
     }
+
     let newBombMatrix = [...bombMatrix];
     const clickedSquare = newBombMatrix[verIndex][horIndex];
 
@@ -161,6 +158,12 @@ function App() {
     if (noBombRows.length < 1) {
       setPlayWon(true);
       endPlay(timerInterval);
+      return;
+    }
+
+    if (!playInProgress && !isAutoClick) {
+      startTimer();
+      setPlayInProgress(true);
     }
 
     setBombMatrix(newBombMatrix);
@@ -168,7 +171,7 @@ function App() {
     if (countBombs(bombMatrix, horIndex, verIndex) === 0) {
       const surroundingLocations = getSurroundingLocations(horIndex, verIndex);
       surroundingLocations.forEach((location) =>
-        handleSquareClick(location.xCor, location.yCor)
+        handleSquareClick(location.xCor, location.yCor, true)
       );
     }
   }
@@ -228,7 +231,6 @@ function App() {
           countBombs={countBombs}
           handleSquareClick={handleSquareClick}
           handleFlagClick={handleFlagClick}
-          startTimer={startTimer}
           isActive={!playComplete}
         />
         <div className="results-container">
