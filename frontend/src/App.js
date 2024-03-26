@@ -148,14 +148,14 @@ function App() {
       return;
     }
 
-    const noBombRows = newBombMatrix.filter((row) => {
-      const noBombSquares = row.filter(
+    const noHiddenBombRows = newBombMatrix.filter((row) => {
+      const noHiddenBombSquares = row.filter(
         (square) => !square.hasBomb && !square.isClicked
       );
-      return noBombSquares.length > 0;
+      return noHiddenBombSquares.length > 0;
     });
 
-    if (noBombRows.length < 1) {
+    if (noHiddenBombRows.length < 1) {
       setPlayWon(true);
       endPlay(timerInterval);
       return;
