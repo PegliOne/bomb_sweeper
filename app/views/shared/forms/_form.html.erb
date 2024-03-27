@@ -2,12 +2,12 @@
   <p class="text-left text-danger fw-bold">Error: <%= error_message %></p>
 
   <% if type == "Sign Up" %>
-    <%= render partial: "shared/forms/form_input", locals: { form: form, label: :username, type: "text", placeholder: "Enter a name here ...", required: false } %>
+    <%= render partial: "shared/forms/form_input", locals: { form: form, label: :username, type: "text", placeholder: "Enter a name here ...", required: true, minlength: 8, maxlength: 20 } %>
   <% end %>  
-  <%= render partial: "shared/forms/form_input", locals: { form: form, label: :email, type: "email", placeholder: "Enter an email here ...", required: true } %>
-  <%= render partial: "shared/forms/form_input", locals: { form: form, label: :password, type: "password", placeholder: "Enter a password here ...", required: true } %>
+  <%= render partial: "shared/forms/form_input", locals: { form: form, label: :email, type: "email", placeholder: "Enter an email here ...", required: true, minlength: 8, maxlength: 100 } %>
+  <%= render partial: "shared/forms/form_input", locals: { form: form, label: :password, type: "password", placeholder: "Enter a password here ...", required: true, minlength: 6, maxlength: 20 } %>
   <% if type == "Sign Up" %>
-    <%= render partial: "shared/forms/form_input", locals: { form: form, label: :password_confirmation, type: "password", placeholder: "Enter password again ...", required: false } %>
+    <%= render partial: "shared/forms/form_input", locals: { form: form, label: :password_confirmation, type: "password", placeholder: "Enter password again ...", required: true, minlength: 6, maxlength: 20 } %>
   <% end %>  
 
   <div class="d-flex justify-content-center mt-5">
