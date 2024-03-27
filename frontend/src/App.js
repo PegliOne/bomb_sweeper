@@ -17,6 +17,7 @@ function App() {
   const [playComplete, setPlayComplete] = useState(false);
   const [playWon, setPlayWon] = useState(false);
   const [bombMatrix, setBombMatrix] = useState([]);
+  const [buttonText, setButtonText] = useState("Submit Time");
 
   const boardSizes = {
     easy: [9, 9],
@@ -51,6 +52,7 @@ function App() {
     setPlayComplete(false);
     resetTimer();
     createBoard(isValidGamePage, boardSizes, difficulty);
+    setButtonText("Submit Time");
   }
 
   function checkValidLocation(location) {
@@ -212,6 +214,7 @@ function App() {
       seconds: seconds,
     };
     addPlay(play);
+    setButtonText("Time Submitted");
   }
 
   useEffect(() => {
@@ -241,6 +244,7 @@ function App() {
           resetPlay={resetPlay}
           playWon={playWon}
           submitTime={submitTime}
+          buttonText={buttonText}
         />
       </div>
     </div>
