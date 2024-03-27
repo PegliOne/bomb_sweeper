@@ -12,11 +12,12 @@ function App() {
   const isValidGamePage = ["easy", "medium", "hard"].includes(difficulty);
 
   const [seconds, setSeconds] = useState(0);
-  const [timerRunning, setTimerRunning] = useState(false);
+  const [playInProgress, setPlayInProgress] = useState(false);
   const [timerInterval, setTimerInterval] = useState(null);
   const [playComplete, setPlayComplete] = useState(false);
   const [playWon, setPlayWon] = useState(false);
   const [bombMatrix, setBombMatrix] = useState([]);
+  const [buttonText, setButtonText] = useState("Submit Time");
 
   const boardSizes = {
     easy: [9, 9],
@@ -25,11 +26,6 @@ function App() {
   };
 
   function startTimer() {
-    if (timerRunning) {
-      return;
-    }
-
-    setTimerRunning(true);
     const startTime = new Date();
 
     const timerInterval = setInterval(() => {
@@ -41,20 +37,22 @@ function App() {
 
   function resetTimer() {
     clearInterval(timerInterval);
-    setTimerRunning(false);
+    setPlayInProgress(false);
     setSeconds(0);
   }
 
   function endPlay(timerInterval) {
+    setPlayInProgress(false);
     setPlayComplete(true);
     clearInterval(timerInterval);
-    setTimerRunning(false);
   }
 
   function resetPlay() {
+    setPlayInProgress(false);
     setPlayComplete(false);
     resetTimer();
     createBoard(isValidGamePage, boardSizes, difficulty);
+    setButtonText("Submit Time");
   }
 
   function checkValidLocation(location) {
@@ -130,10 +128,11 @@ function App() {
     });
   }
 
-  function handleSquareClick(horIndex, verIndex) {
+  function handleSquareClick(horIndex, verIndex, isAutoClick = false) {
     if (playComplete) {
       return;
     }
+
     let newBombMatrix = [...bombMatrix];
     const clickedSquare = newBombMatrix[verIndex][horIndex];
 
@@ -151,16 +150,22 @@ function App() {
       return;
     }
 
-    const noBombRows = newBombMatrix.filter((row) => {
-      const noBombSquares = row.filter(
+    const noHiddenBombRows = newBombMatrix.filter((row) => {
+      const noHiddenBombSquares = row.filter(
         (square) => !square.hasBomb && !square.isClicked
       );
-      return noBombSquares.length > 0;
+      return noHiddenBombSquares.length > 0;
     });
 
-    if (noBombRows.length < 1) {
+    if (noHiddenBombRows.length < 1) {
       setPlayWon(true);
       endPlay(timerInterval);
+      return;
+    }
+
+    if (!playInProgress && !isAutoClick) {
+      startTimer();
+      setPlayInProgress(true);
     }
 
     setBombMatrix(newBombMatrix);
@@ -168,7 +173,7 @@ function App() {
     if (countBombs(bombMatrix, horIndex, verIndex) === 0) {
       const surroundingLocations = getSurroundingLocations(horIndex, verIndex);
       surroundingLocations.forEach((location) =>
-        handleSquareClick(location.xCor, location.yCor)
+        handleSquareClick(location.xCor, location.yCor, true)
       );
     }
   }
@@ -209,6 +214,7 @@ function App() {
       seconds: seconds,
     };
     addPlay(play);
+    setButtonText("Time Submitted");
   }
 
   useEffect(() => {
@@ -228,7 +234,6 @@ function App() {
           countBombs={countBombs}
           handleSquareClick={handleSquareClick}
           handleFlagClick={handleFlagClick}
-          startTimer={startTimer}
           isActive={!playComplete}
         />
         <div className="results-container">
@@ -239,6 +244,7 @@ function App() {
           resetPlay={resetPlay}
           playWon={playWon}
           submitTime={submitTime}
+          buttonText={buttonText}
         />
       </div>
     </div>

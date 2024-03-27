@@ -1,4 +1,4 @@
-const Timer = ({ seconds, resetPlay, playWon, submitTime }) => {
+const Timer = ({ seconds, resetPlay, playWon, submitTime, buttonText }) => {
   return (
     <section className="timer">
       <span className="timer-text">Timer:</span>
@@ -16,7 +16,7 @@ const Timer = ({ seconds, resetPlay, playWon, submitTime }) => {
       <button onClick={resetPlay}>Reset</button>
       <div className="timer-submit">
         {playWon && (
-          <button onClick={() => submitTime(seconds)}>Submit Time</button>
+          <button onClick={() => submitTime(seconds)}>{buttonText}</button>
         )}
       </div>
     </section>
