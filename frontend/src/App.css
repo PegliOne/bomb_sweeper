@@ -101,6 +101,10 @@ div.results-container p.results.lose {
   color: darkred;
 }
 
+p.error-message {
+  height: 24px;
+}
+
 /* Mobile Styles */
 
 @media screen and (max-width: 860px) {

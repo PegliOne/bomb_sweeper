@@ -10,10 +10,10 @@ class UsersController < ApplicationController
   def create
     user_emails = User.all.map{|user| user.email}
     if user_emails.include?(user_params[:email])
-      flash[:error] = "Error: Email Already In Use"
+      flash[:error] = "Error: Cannot Use Email That Is Already In Use"
       redirect_to "/sign_up"
     elsif user_params[:password] != user_params[:password_confirmation]
-      flash[:error] = "Error: Password And Password Confirmation Do Not Match"
+      flash[:error] = "Error: Password And Password Confirmation Must Match"
       redirect_to "/sign_up"  
     else
       @user = User.create(user_params)

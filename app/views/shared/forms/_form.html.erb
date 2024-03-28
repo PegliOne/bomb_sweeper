@@ -1,9 +1,9 @@
 <%= form_with model: model, url: path, class: "mt-4 mb-5" do |form| %>
-  <% flash.each do |type, message| %>
-    <p class="text-left text-danger fw-bold">
+  <p class="error-message text-left text-danger fw-bold">
+    <% flash.each do |type, message| %>
       <%= message %>
-    </p>
-  <% end %>
+    <% end %>
+  </p>
 
   <% if type == "Sign Up" %>
     <%= render partial: "shared/forms/form_input", locals: { form: form, label: :username, type: "text", placeholder: "Enter a name here ...", required: true, minlength: 8, maxlength: 20 } %>
