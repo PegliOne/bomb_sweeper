@@ -1,5 +1,9 @@
 <%= form_with model: model, url: path, class: "mt-4 mb-5" do |form| %>
-  <p class="text-left text-danger fw-bold">Error: <%= error_message %></p>
+  <% flash.each do |type, message| %>
+    <p class="text-left text-danger fw-bold">
+      <%= message %>
+    </p>
+  <% end %>
 
   <% if type == "Sign Up" %>
     <%= render partial: "shared/forms/form_input", locals: { form: form, label: :username, type: "text", placeholder: "Enter a name here ...", required: true, minlength: 8, maxlength: 20 } %>
@@ -8,7 +12,7 @@
   <%= render partial: "shared/forms/form_input", locals: { form: form, label: :password, type: "password", placeholder: "Enter a password here ...", required: true, minlength: 6, maxlength: 20 } %>
   <% if type == "Sign Up" %>
     <%= render partial: "shared/forms/form_input", locals: { form: form, label: :password_confirmation, type: "password", placeholder: "Enter password again ...", required: true, minlength: 6, maxlength: 20 } %>
-  <% end %>  
+  <% end %>
 
   <div class="d-flex justify-content-center mt-5">
     <%= form.submit type, class: "btn btn-dark" %>
