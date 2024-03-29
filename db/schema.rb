@@ -17,7 +17,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_12_055502) do
     t.integer "time_in_seconds"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "play_id"
     t.integer "user_id"
   end
 
@@ -27,7 +26,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_12_055502) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "email"
-    t.integer "user_id"
   end
 
 end
