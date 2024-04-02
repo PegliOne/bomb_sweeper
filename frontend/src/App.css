@@ -20,10 +20,12 @@ section.board > div > div {
   width: 28px;
   height: 28px;
   border: 1px solid black;
-  color: #8b0000;
+  color: #9a0202;
+  background-color: rgb(200, 242, 200);
 }
 
-section.board > div > div.hidden {
+section.board > div > div.hidden,
+section.board > div > div.flagged {
   background-color: rgb(25, 135, 84);
 }
 
@@ -99,6 +101,10 @@ div.results-container p.results.win {
 
 div.results-container p.results.lose {
   color: darkred;
+}
+
+p.error-message {
+  height: 24px;
 }
 
 /* Mobile Styles */
