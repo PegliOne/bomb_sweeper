@@ -10,8 +10,11 @@ function App() {
   const path = window.location.pathname;
   const difficulty = path === "/" ? "easy" : path.slice(6).toLowerCase();
   const isValidGamePage = ["easy", "medium", "hard"].includes(difficulty);
+  const defaultFlagsAvailable =
+    difficulty === "easy" ? 10 : difficulty === "medium" ? 40 : 99;
 
   const [seconds, setSeconds] = useState(0);
+  const [flagsAvailable, setFlagsAvailable] = useState(defaultFlagsAvailable);
   const [playInProgress, setPlayInProgress] = useState(false);
   const [timerInterval, setTimerInterval] = useState(null);
   const [playComplete, setPlayComplete] = useState(false);
@@ -236,6 +239,9 @@ function App() {
           handleFlagClick={handleFlagClick}
           isActive={!playComplete}
         />
+        <div className="flag-counter">
+          <span className="flag-image"></span>: {flagsAvailable}
+        </div>
         <div className="results-container">
           {playComplete && <Results playWon={playWon} />}
         </div>
