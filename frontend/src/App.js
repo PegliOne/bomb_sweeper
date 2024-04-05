@@ -184,9 +184,11 @@ function App() {
   function handleFlagClick(e, horIndex, verIndex) {
     e.preventDefault();
 
-    if (playComplete) {
+    if (playComplete || flagsAvailable < 1) {
       return;
     }
+
+    setFlagsAvailable(flagsAvailable - 1);
 
     let newBombMatrix = [...bombMatrix];
     const clickedSquare = newBombMatrix[verIndex][horIndex];
