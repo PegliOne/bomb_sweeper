@@ -1,13 +1,5 @@
 <section class="mt-4 text-center">
-  <h3>Fastest Easy Times</h3>
-
-  <%= render partial: "shared/score_tables/score_table", locals: {plays: easy_plays} %>
-
-  <h3>Fastest Medium Times</h3>
-
-  <%= render partial: "shared/score_tables/score_table", locals: {plays: medium_plays} %>
-
-  <h3>Fastest Hard Times</h3>
-
-  <%= render partial: "shared/score_tables/score_table", locals: {plays: hard_plays} %>
+  <%= render partial: "shared/score_tables/score_table", locals: {difficulty: "Easy", plays: easy_plays} %>
+  <%= render partial: "shared/score_tables/score_table", locals: {difficulty: "Medium", plays: medium_plays} %>
+  <%= render partial: "shared/score_tables/score_table", locals: {difficulty: "Hard", plays: hard_plays} %>
 </section>  
