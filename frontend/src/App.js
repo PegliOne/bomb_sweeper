@@ -189,8 +189,6 @@ function App() {
       return;
     }
 
-    setFlagsAvailable(flagsAvailable - 1);
-
     let newBombMatrix = [...bombMatrix];
     const clickedSquare = newBombMatrix[verIndex][horIndex];
 
@@ -199,6 +197,10 @@ function App() {
     }
 
     clickedSquare.hasFlag = !clickedSquare.hasFlag;
+    const newFlagsRemaining = clickedSquare.hasFlag
+      ? flagsAvailable - 1
+      : flagsAvailable + 1;
+    setFlagsAvailable(newFlagsRemaining);
 
     setBombMatrix(newBombMatrix);
   }
