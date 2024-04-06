@@ -42,6 +42,7 @@ function App() {
     clearInterval(timerInterval);
     setPlayInProgress(false);
     setSeconds(0);
+    setFlagsAvailable(defaultFlagsAvailable);
   }
 
   function endPlay(timerInterval) {
