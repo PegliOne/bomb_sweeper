@@ -127,7 +127,7 @@ function App() {
   function revealAllBombs(bombMatrix) {
     bombMatrix.map((row) => {
       row
-        .filter((square) => square.hasBomb)
+        .filter((square) => square.hasBomb && !square.hasFlag)
         .map((square) => (square.isClicked = true));
     });
   }
@@ -197,6 +197,7 @@ function App() {
     }
 
     clickedSquare.hasFlag = !clickedSquare.hasFlag;
+
     const newFlagsRemaining = clickedSquare.hasFlag
       ? flagsAvailable - 1
       : flagsAvailable + 1;
