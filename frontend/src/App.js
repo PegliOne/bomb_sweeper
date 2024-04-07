@@ -10,8 +10,11 @@ function App() {
   const path = window.location.pathname;
   const difficulty = path === "/" ? "easy" : path.slice(6).toLowerCase();
   const isValidGamePage = ["easy", "medium", "hard"].includes(difficulty);
+  const defaultFlagsAvailable =
+    difficulty === "easy" ? 10 : difficulty === "medium" ? 40 : 99;
 
   const [seconds, setSeconds] = useState(0);
+  const [flagsRemaining, setFlagsRemaining] = useState(defaultFlagsAvailable);
   const [playInProgress, setPlayInProgress] = useState(false);
   const [timerInterval, setTimerInterval] = useState(null);
   const [playComplete, setPlayComplete] = useState(false);
@@ -39,6 +42,7 @@ function App() {
     clearInterval(timerInterval);
     setPlayInProgress(false);
     setSeconds(0);
+    setFlagsRemaining(defaultFlagsAvailable);
   }
 
   function endPlay(timerInterval) {
@@ -120,10 +124,10 @@ function App() {
     return bombCount;
   }
 
-  function revealAllBombs(bombMatrix) {
+  function revealUnflaggedBombs(bombMatrix) {
     bombMatrix.map((row) => {
       row
-        .filter((square) => square.hasBomb)
+        .filter((square) => square.hasBomb && !square.hasFlag)
         .map((square) => (square.isClicked = true));
     });
   }
@@ -145,7 +149,7 @@ function App() {
     if (clickedSquare.hasBomb) {
       setPlayWon(false);
       endPlay(timerInterval);
-      revealAllBombs(newBombMatrix);
+      revealUnflaggedBombs(newBombMatrix);
       setBombMatrix(newBombMatrix);
       return;
     }
@@ -194,6 +198,11 @@ function App() {
 
     clickedSquare.hasFlag = !clickedSquare.hasFlag;
 
+    const newFlagsRemaining = clickedSquare.hasFlag
+      ? flagsRemaining - 1
+      : flagsRemaining + 1;
+    setFlagsRemaining(newFlagsRemaining);
+
     setBombMatrix(newBombMatrix);
   }
 
@@ -236,6 +245,9 @@ function App() {
           handleFlagClick={handleFlagClick}
           isActive={!playComplete}
         />
+        <div className="flag-counter">
+          <span className="flag-image"></span>: {flagsRemaining}
+        </div>
         <div className="results-container">
           {playComplete && <Results playWon={playWon} />}
         </div>

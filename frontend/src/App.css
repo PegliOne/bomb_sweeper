@@ -44,6 +44,34 @@ section.board > div > div.flagged {
   background-size: cover;
 }
 
+div.flag-counter > span.flag-image {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url("../public/red-flag.png");
+  background-size: cover;
+}
+
+div.results-container {
+  height: 24px;
+  margin: 24px 0;
+}
+
+div.results-container p.results {
+  margin: 0;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+div.results-container p.results.win {
+  color: darkgreen;
+}
+
+div.results-container p.results.lose {
+  color: darkred;
+}
+
 section.timer {
   display: flex;
   align-items: center;
@@ -81,26 +109,6 @@ section.timer > span > span.timer-time {
   display: inline-block;
   width: 20px;
   font-weight: 500;
-}
-
-div.results-container {
-  height: 24px;
-  margin: 24px 0;
-}
-
-div.results-container p.results {
-  margin: 0;
-  text-align: center;
-  font-size: 1.2rem;
-  font-weight: 600;
-}
-
-div.results-container p.results.win {
-  color: darkgreen;
-}
-
-div.results-container p.results.lose {
-  color: darkred;
 }
 
 p.error-message {
