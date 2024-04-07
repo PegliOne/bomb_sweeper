@@ -124,7 +124,7 @@ function App() {
     return bombCount;
   }
 
-  function revealAllBombs(bombMatrix) {
+  function revealUnflaggedBombs(bombMatrix) {
     bombMatrix.map((row) => {
       row
         .filter((square) => square.hasBomb && !square.hasFlag)
@@ -149,7 +149,7 @@ function App() {
     if (clickedSquare.hasBomb) {
       setPlayWon(false);
       endPlay(timerInterval);
-      revealAllBombs(newBombMatrix);
+      revealUnflaggedBombs(newBombMatrix);
       setBombMatrix(newBombMatrix);
       return;
     }
