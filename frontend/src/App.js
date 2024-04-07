@@ -14,7 +14,7 @@ function App() {
     difficulty === "easy" ? 10 : difficulty === "medium" ? 40 : 99;
 
   const [seconds, setSeconds] = useState(0);
-  const [flagsAvailable, setFlagsAvailable] = useState(defaultFlagsAvailable);
+  const [flagsRemaining, setFlagsRemaining] = useState(defaultFlagsAvailable);
   const [playInProgress, setPlayInProgress] = useState(false);
   const [timerInterval, setTimerInterval] = useState(null);
   const [playComplete, setPlayComplete] = useState(false);
@@ -42,7 +42,7 @@ function App() {
     clearInterval(timerInterval);
     setPlayInProgress(false);
     setSeconds(0);
-    setFlagsAvailable(defaultFlagsAvailable);
+    setFlagsRemaining(defaultFlagsAvailable);
   }
 
   function endPlay(timerInterval) {
@@ -199,9 +199,9 @@ function App() {
     clickedSquare.hasFlag = !clickedSquare.hasFlag;
 
     const newFlagsRemaining = clickedSquare.hasFlag
-      ? flagsAvailable - 1
-      : flagsAvailable + 1;
-    setFlagsAvailable(newFlagsRemaining);
+      ? flagsRemaining - 1
+      : flagsRemaining + 1;
+    setFlagsRemaining(newFlagsRemaining);
 
     setBombMatrix(newBombMatrix);
   }
@@ -246,7 +246,7 @@ function App() {
           isActive={!playComplete}
         />
         <div className="flag-counter">
-          <span className="flag-image"></span>: {flagsAvailable}
+          <span className="flag-image"></span>: {flagsRemaining}
         </div>
         <div className="results-container">
           {playComplete && <Results playWon={playWon} />}
