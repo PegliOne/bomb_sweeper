@@ -185,7 +185,7 @@ function App() {
   function handleFlagClick(e, horIndex, verIndex) {
     e.preventDefault();
 
-    if (playComplete || flagsAvailable < 1) {
+    if (playComplete) {
       return;
     }
 
