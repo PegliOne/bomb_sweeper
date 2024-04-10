@@ -10,11 +10,11 @@ function App() {
   const path = window.location.pathname;
   const difficulty = path === "/" ? "easy" : path.slice(6).toLowerCase();
   const isValidGamePage = ["easy", "medium", "hard"].includes(difficulty);
-  const defaultFlagsAvailable =
+  const initialFlagsCount =
     difficulty === "easy" ? 10 : difficulty === "medium" ? 40 : 99;
 
   const [seconds, setSeconds] = useState(0);
-  const [flagsRemaining, setFlagsRemaining] = useState(defaultFlagsAvailable);
+  const [flagsRemaining, setFlagsRemaining] = useState(initialFlagsCount);
   const [playInProgress, setPlayInProgress] = useState(false);
   const [timerInterval, setTimerInterval] = useState(null);
   const [playComplete, setPlayComplete] = useState(false);
@@ -42,7 +42,7 @@ function App() {
     clearInterval(timerInterval);
     setPlayInProgress(false);
     setSeconds(0);
-    setFlagsRemaining(defaultFlagsAvailable);
+    setFlagsRemaining(initialFlagsCount);
   }
 
   function endPlay(timerInterval) {
