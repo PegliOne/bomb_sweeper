@@ -132,6 +132,14 @@ function App() {
     });
   }
 
+  function revealFalselyFlaggedSquares(bombMatrix) {
+    bombMatrix.map((row) => {
+      row
+        .filter((square) => !square.hasBomb && square.hasFlag)
+        .map((square) => (square.hasFalseFlag = true));
+    });
+  }
+
   function handleSquareClick(horIndex, verIndex, isAutoClick = false) {
     if (playComplete) {
       return;
@@ -150,6 +158,7 @@ function App() {
       setPlayWon(false);
       endPlay(timerInterval);
       revealUnflaggedBombs(newBombMatrix);
+      revealFalselyFlaggedSquares(newBombMatrix);
       setBombMatrix(newBombMatrix);
       return;
     }

@@ -27,7 +27,7 @@ const Board = ({
                   key={horIndex}
                   className={`${getSquareClass(square)} ${
                     isActive ? "clickable" : ""
-                  }`}
+                  }${square.hasFalseFlag ? "falsely-flagged" : ""}`}
                   onClick={() => handleSquareClick(horIndex, verIndex)}
                   onContextMenu={(e) => handleFlagClick(e, horIndex, verIndex)}
                 >
