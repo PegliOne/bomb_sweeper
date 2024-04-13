@@ -7,8 +7,15 @@ import { addPlay } from "./services/play-service";
 
 function App() {
   const bombProbability = 0.125;
-  const path = window.location.pathname;
-  const difficulty = path === "/" ? "easy" : path.slice(6).toLowerCase();
+
+  const boardSizes = {
+    easy: [9, 9],
+    medium: [16, 16],
+    hard: [30, 16],
+  };
+
+  const [difficulty, setDifficulty] = useState(getDifficulty());
+
   const isValidGamePage = ["easy", "medium", "hard"].includes(difficulty);
   const initialFlagsCount =
     difficulty === "easy" ? 10 : difficulty === "medium" ? 40 : 99;
@@ -22,11 +29,10 @@ function App() {
   const [bombMatrix, setBombMatrix] = useState([]);
   const [buttonText, setButtonText] = useState("Submit Time");
 
-  const boardSizes = {
-    easy: [9, 9],
-    medium: [16, 16],
-    hard: [30, 16],
-  };
+  function getDifficulty() {
+    const path = window.location.pathname;
+    return path === "/" ? "easy" : path.slice(6).toLowerCase();
+  }
 
   function startTimer() {
     const startTime = new Date();
@@ -236,7 +242,9 @@ function App() {
   }
 
   useEffect(() => {
-    createBoard(isValidGamePage, boardSizes, difficulty);
+    const newDifficulty = getDifficulty();
+    setDifficulty(newDifficulty);
+    createBoard(isValidGamePage, boardSizes, newDifficulty);
   }, []);
 
   if (!isValidGamePage) {
