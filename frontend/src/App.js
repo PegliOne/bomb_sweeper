@@ -7,14 +7,21 @@ import { addPlay } from "./services/play-service";
 
 function App() {
   const bombProbability = 0.125;
-  const path = window.location.pathname;
-  const difficulty = path === "/" ? "easy" : path.slice(6).toLowerCase();
+
+  const boardSizes = {
+    easy: [9, 9],
+    medium: [16, 16],
+    hard: [30, 16],
+  };
+
+  const [difficulty, setDifficulty] = useState(getDifficulty());
+
   const isValidGamePage = ["easy", "medium", "hard"].includes(difficulty);
-  const defaultFlagsAvailable =
+  const initialFlagsCount =
     difficulty === "easy" ? 10 : difficulty === "medium" ? 40 : 99;
 
   const [seconds, setSeconds] = useState(0);
-  const [flagsRemaining, setFlagsRemaining] = useState(defaultFlagsAvailable);
+  const [flagsRemaining, setFlagsRemaining] = useState(initialFlagsCount);
   const [playInProgress, setPlayInProgress] = useState(false);
   const [timerInterval, setTimerInterval] = useState(null);
   const [playComplete, setPlayComplete] = useState(false);
@@ -22,11 +29,10 @@ function App() {
   const [bombMatrix, setBombMatrix] = useState([]);
   const [buttonText, setButtonText] = useState("Submit Time");
 
-  const boardSizes = {
-    easy: [9, 9],
-    medium: [16, 16],
-    hard: [30, 16],
-  };
+  function getDifficulty() {
+    const path = window.location.pathname;
+    return path === "/" ? "easy" : path.slice(6).toLowerCase();
+  }
 
   function startTimer() {
     const startTime = new Date();
@@ -42,7 +48,7 @@ function App() {
     clearInterval(timerInterval);
     setPlayInProgress(false);
     setSeconds(0);
-    setFlagsRemaining(defaultFlagsAvailable);
+    setFlagsRemaining(initialFlagsCount);
   }
 
   function endPlay(timerInterval) {
@@ -132,6 +138,14 @@ function App() {
     });
   }
 
+  function revealFalselyFlaggedSquares(bombMatrix) {
+    bombMatrix.map((row) => {
+      row
+        .filter((square) => !square.hasBomb && square.hasFlag)
+        .map((square) => (square.hasFalseFlag = true));
+    });
+  }
+
   function handleSquareClick(horIndex, verIndex, isAutoClick = false) {
     if (playComplete) {
       return;
@@ -150,6 +164,7 @@ function App() {
       setPlayWon(false);
       endPlay(timerInterval);
       revealUnflaggedBombs(newBombMatrix);
+      revealFalselyFlaggedSquares(newBombMatrix);
       setBombMatrix(newBombMatrix);
       return;
     }
@@ -227,7 +242,9 @@ function App() {
   }
 
   useEffect(() => {
-    createBoard(isValidGamePage, boardSizes, difficulty);
+    const newDifficulty = getDifficulty();
+    setDifficulty(newDifficulty);
+    createBoard(isValidGamePage, boardSizes, newDifficulty);
   }, []);
 
   if (!isValidGamePage) {

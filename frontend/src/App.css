@@ -44,10 +44,23 @@ section.board > div > div.flagged {
   background-size: cover;
 }
 
+section.board > div > div.flagged.falsely-flagged {
+  border: 2px red solid;
+}
+
+div.flag-counter {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
 div.flag-counter > span.flag-image {
   display: inline-block;
   width: 20px;
   height: 20px;
+  margin-right: 4px;
   background-image: url("../public/red-flag.png");
   background-size: cover;
 }
