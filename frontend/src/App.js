@@ -113,6 +113,39 @@ function App() {
     return testLocations.filter((location) => checkValidLocation(location));
   }
 
+  function createBombLocations() {
+    let bombLocations = [];
+
+    while (bombLocations.length < initialFlagsCount) {
+      const xCor = Math.floor(Math.random() * boardSizes[difficulty][0]);
+      const yCor = Math.floor(Math.random() * boardSizes[difficulty][1]);
+      const bombLocation = [xCor, yCor].toString();
+      bombLocations.push(bombLocation);
+    }
+
+    return bombLocations;
+  }
+
+  function createBombMatrix() {
+    const bombLocations = createBombLocations();
+
+    const bombMatrix = [];
+
+    for (let yCor = 0; yCor < boardSizes[difficulty][1]; yCor++) {
+      const bombMatrixRow = [];
+      for (let xCor = 0; xCor < boardSizes[difficulty][0]; xCor++) {
+        if (bombLocations.includes([xCor, yCor].toString())) {
+          bombMatrixRow.push({ hasBomb: true });
+        } else {
+          bombMatrixRow.push({});
+        }
+      }
+      bombMatrix.push(bombMatrixRow);
+    }
+
+    return bombMatrix;
+  }
+
   function createBombArray() {
     return Array.from({ length: boardSizes[difficulty][0] }, () =>
       Math.random() < bombProbability
@@ -221,13 +254,12 @@ function App() {
     setBombMatrix(newBombMatrix);
   }
 
-  function createBoard(isValidGamePage, boardSizes, difficulty) {
+  function createBoard(isValidGamePage) {
     if (!isValidGamePage) {
       return;
     }
-    const bombMatrix = Array.from({ length: boardSizes[difficulty][1] }, () =>
-      createBombArray()
-    );
+    const bombMatrix = createBombMatrix();
+
     setBombMatrix(bombMatrix);
   }
 
