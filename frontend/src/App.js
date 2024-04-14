@@ -31,7 +31,7 @@ function App() {
 
   function getDifficulty() {
     const path = window.location.pathname;
-    return path === "/" ? "easy" : path.slice(6).toLowerCase();
+    return path === "/" ? "medium" : path.slice(6).toLowerCase();
   }
 
   function startTimer() {
