@@ -9,6 +9,19 @@ BombSweeper is a Minesweeper clone built using Ruby on Rails, React.js and Boots
 - User accounts with profiles featuring win percentages and quickest saved times
 - A scoreboards featuring the best times for all users
 
+## Upcoming Improvements
+
+- Fixing instructions styling
+- Add "x" to wrongly flagged squares at the end of the game
+- Saving the scores to the backend
+- Hiding the "Submit Time" button for non-logged in users
+
+## Technologies Used
+
+- Bootstrap
+- React.js
+- Ruby on Rails
+
 ## How To Use
 
 ### Set Up
@@ -42,16 +55,3 @@ Once all the safe squares have been revealed, you win the game. The timer will s
 You can reset the board and the timer at any time by clicking the "Reset" button
 
 Enjoy the game!
-
-## Upcoming Improvements
-
-- Fixing instructions styling
-- Add "x" to wrongly flagged squares at the end of the game
-- Saving the scores to the backend
-- Hiding the "Submit Time" button for non-logged in users
-
-## Technologies Used
-
-- Bootstrap
-- React.js
-- Ruby on Rails
