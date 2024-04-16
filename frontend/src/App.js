@@ -31,7 +31,7 @@ function App() {
 
   function getDifficulty() {
     const path = window.location.pathname;
-    return path === "/" ? "easy" : path.slice(6).toLowerCase();
+    return path === "/" ? "medium" : path.slice(6).toLowerCase();
   }
 
   function startTimer() {
@@ -113,12 +113,36 @@ function App() {
     return testLocations.filter((location) => checkValidLocation(location));
   }
 
-  function createBombArray() {
-    return Array.from({ length: boardSizes[difficulty][0] }, () =>
-      Math.random() < bombProbability
-        ? { hasBomb: true, isClicked: false }
-        : { hasBomb: false, isClicked: false }
+  function createBombLocations() {
+    let bombLocations = [];
+
+    while (bombLocations.length < initialFlagsCount) {
+      const xCor = Math.floor(Math.random() * boardSizes[difficulty][0]);
+      const yCor = Math.floor(Math.random() * boardSizes[difficulty][1]);
+      const bombLocation = [xCor, yCor].toString();
+      bombLocations.push(bombLocation);
+    }
+
+    return bombLocations;
+  }
+
+  function createBombMatrix() {
+    const bombLocations = createBombLocations();
+
+    const emptyRow = new Array(boardSizes[difficulty][0]).fill(null);
+    const emptyMatrix = new Array(boardSizes[difficulty][1]).fill(emptyRow);
+
+    const bombMatrix = emptyMatrix.map((row, yCor) =>
+      row.map((square, xCor) => {
+        square = {};
+        if (bombLocations.includes([xCor, yCor].toString())) {
+          square.hasBomb = true;
+        }
+        return square;
+      })
     );
+
+    return bombMatrix;
   }
 
   function countBombs(bombMatrix, horIndex, verIndex) {
@@ -221,13 +245,12 @@ function App() {
     setBombMatrix(newBombMatrix);
   }
 
-  function createBoard(isValidGamePage, boardSizes, difficulty) {
+  function createBoard(isValidGamePage) {
     if (!isValidGamePage) {
       return;
     }
-    const bombMatrix = Array.from({ length: boardSizes[difficulty][1] }, () =>
-      createBombArray()
-    );
+    const bombMatrix = createBombMatrix();
+
     setBombMatrix(bombMatrix);
   }
 

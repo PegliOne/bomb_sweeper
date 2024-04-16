@@ -5,7 +5,7 @@ class PagesController < ApplicationController
     if params[:difficulty].present? && ["easy", "medium", "hard"].include?(params[:difficulty].downcase)
       @difficulty = params[:difficulty]
     else  
-      @difficulty = "easy"
+      @difficulty = "medium"
     end  
   end 
   
