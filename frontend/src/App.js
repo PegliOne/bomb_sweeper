@@ -146,14 +146,6 @@ function App() {
     return bombMatrix;
   }
 
-  function createBombArray() {
-    return Array.from({ length: boardSizes[difficulty][0] }, () =>
-      Math.random() < bombProbability
-        ? { hasBomb: true, isClicked: false }
-        : { hasBomb: false, isClicked: false }
-    );
-  }
-
   function countBombs(bombMatrix, horIndex, verIndex) {
     const surroundingLocations = getSurroundingLocations(horIndex, verIndex);
     const bombCount = surroundingLocations.filter(
