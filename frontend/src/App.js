@@ -129,19 +129,18 @@ function App() {
   function createBombMatrix() {
     const bombLocations = createBombLocations();
 
-    const bombMatrix = [];
+    const emptyRow = new Array(boardSizes[difficulty][0]).fill(null);
+    const emptyMatrix = new Array(boardSizes[difficulty][1]).fill(emptyRow);
 
-    for (let yCor = 0; yCor < boardSizes[difficulty][1]; yCor++) {
-      const bombMatrixRow = [];
-      for (let xCor = 0; xCor < boardSizes[difficulty][0]; xCor++) {
+    const bombMatrix = emptyMatrix.map((row, yCor) =>
+      row.map((square, xCor) => {
+        square = {};
         if (bombLocations.includes([xCor, yCor].toString())) {
-          bombMatrixRow.push({ hasBomb: true });
-        } else {
-          bombMatrixRow.push({});
+          square.hasBomb = true;
         }
-      }
-      bombMatrix.push(bombMatrixRow);
-    }
+        return square;
+      })
+    );
 
     return bombMatrix;
   }
