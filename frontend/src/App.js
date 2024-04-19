@@ -28,6 +28,7 @@ function App() {
   const [playWon, setPlayWon] = useState(false);
   const [bombMatrix, setBombMatrix] = useState([]);
   const [buttonText, setButtonText] = useState("Submit Time");
+  const [timeSubmitted, setTimeSubmitted] = useState(false);
 
   function getDifficulty() {
     const path = window.location.pathname;
@@ -262,6 +263,7 @@ function App() {
     };
     addPlay(play);
     setButtonText("Time Submitted");
+    setTimeSubmitted(true);
   }
 
   useEffect(() => {
@@ -297,6 +299,7 @@ function App() {
           playWon={playWon}
           submitTime={submitTime}
           buttonText={buttonText}
+          timeSubmitted={timeSubmitted}
         />
       </div>
     </div>
