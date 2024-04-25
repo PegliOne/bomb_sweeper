@@ -8,6 +8,7 @@ class PlaysController < ApplicationController
   end 
 
   def create
+    puts "Play create called"
     user = fetch_user
     play = Play.create(play_params)
     unless user.nil?  

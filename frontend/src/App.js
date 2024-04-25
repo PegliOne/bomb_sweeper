@@ -6,8 +6,6 @@ import Timer from "./components/Timer";
 import { addPlay } from "./services/play-service";
 
 function App() {
-  const bombProbability = 0.125;
-
   const boardSizes = {
     easy: [9, 9],
     medium: [16, 16],
@@ -17,11 +15,11 @@ function App() {
   const [difficulty, setDifficulty] = useState(getDifficulty());
 
   const isValidGamePage = ["easy", "medium", "hard"].includes(difficulty);
-  const initialFlagsCount =
+  const bombCount =
     difficulty === "easy" ? 10 : difficulty === "medium" ? 40 : 99;
 
   const [seconds, setSeconds] = useState(0);
-  const [flagsRemaining, setFlagsRemaining] = useState(initialFlagsCount);
+  const [flagsRemaining, setFlagsRemaining] = useState(bombCount);
   const [playInProgress, setPlayInProgress] = useState(false);
   const [timerInterval, setTimerInterval] = useState(null);
   const [playComplete, setPlayComplete] = useState(false);
@@ -49,7 +47,7 @@ function App() {
     clearInterval(timerInterval);
     setPlayInProgress(false);
     setSeconds(0);
-    setFlagsRemaining(initialFlagsCount);
+    setFlagsRemaining(bombCount);
   }
 
   function endPlay(timerInterval) {
@@ -117,7 +115,7 @@ function App() {
   function createBombLocations() {
     let bombLocations = [];
 
-    while (bombLocations.length < initialFlagsCount) {
+    while (bombLocations.length < bombCount) {
       const xCor = Math.floor(Math.random() * boardSizes[difficulty][0]);
       const yCor = Math.floor(Math.random() * boardSizes[difficulty][1]);
       const bombLocation = [xCor, yCor].toString();
