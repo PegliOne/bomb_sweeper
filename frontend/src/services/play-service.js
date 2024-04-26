@@ -8,6 +8,14 @@ export const addPlay = (play) => {
   localStorage.setItem("plays", JSON.stringify(plays));
   console.log(localStorage.getItem("plays"));
   return axios.post(
-    `/plays/${play.difficulty}/${play.playWon}/${play.seconds}`
+    `/plays/${play.difficulty}/${play.playWon}/${play.seconds}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "X-CSRF-Token": document.querySelector("meta[name='csrf-token']")
+          .content,
+      },
+    }
   );
 };
