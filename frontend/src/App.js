@@ -6,8 +6,6 @@ import Timer from "./components/Timer";
 import { addPlay } from "./services/play-service";
 
 function App() {
-  const bombProbability = 0.125;
-
   const boardSizes = {
     easy: [9, 9],
     medium: [16, 16],
@@ -17,17 +15,18 @@ function App() {
   const [difficulty, setDifficulty] = useState(getDifficulty());
 
   const isValidGamePage = ["easy", "medium", "hard"].includes(difficulty);
-  const initialFlagsCount =
+  const bombCount =
     difficulty === "easy" ? 10 : difficulty === "medium" ? 40 : 99;
 
   const [seconds, setSeconds] = useState(0);
-  const [flagsRemaining, setFlagsRemaining] = useState(initialFlagsCount);
+  const [flagsRemaining, setFlagsRemaining] = useState(bombCount);
   const [playInProgress, setPlayInProgress] = useState(false);
   const [timerInterval, setTimerInterval] = useState(null);
   const [playComplete, setPlayComplete] = useState(false);
   const [playWon, setPlayWon] = useState(false);
-  const [bombMatrix, setBombMatrix] = useState([]);
+  const [squares, setSquares] = useState([]);
   const [buttonText, setButtonText] = useState("Submit Time");
+  const [timeSubmitted, setTimeSubmitted] = useState(false);
 
   function getDifficulty() {
     const path = window.location.pathname;
@@ -48,7 +47,7 @@ function App() {
     clearInterval(timerInterval);
     setPlayInProgress(false);
     setSeconds(0);
-    setFlagsRemaining(initialFlagsCount);
+    setFlagsRemaining(bombCount);
   }
 
   function endPlay(timerInterval) {
@@ -116,7 +115,7 @@ function App() {
   function createBombLocations() {
     let bombLocations = [];
 
-    while (bombLocations.length < initialFlagsCount) {
+    while (bombLocations.length < bombCount) {
       const xCor = Math.floor(Math.random() * boardSizes[difficulty][0]);
       const yCor = Math.floor(Math.random() * boardSizes[difficulty][1]);
       const bombLocation = [xCor, yCor].toString();
@@ -126,13 +125,13 @@ function App() {
     return bombLocations;
   }
 
-  function createBombMatrix() {
+  function createSquares() {
     const bombLocations = createBombLocations();
 
     const emptyRow = new Array(boardSizes[difficulty][0]).fill(null);
     const emptyMatrix = new Array(boardSizes[difficulty][1]).fill(emptyRow);
 
-    const bombMatrix = emptyMatrix.map((row, yCor) =>
+    const squares = emptyMatrix.map((row, yCor) =>
       row.map((square, xCor) => {
         square = {};
         if (bombLocations.includes([xCor, yCor].toString())) {
@@ -142,28 +141,28 @@ function App() {
       })
     );
 
-    return bombMatrix;
+    return squares;
   }
 
-  function countBombs(bombMatrix, horIndex, verIndex) {
+  function countBombs(squares, horIndex, verIndex) {
     const surroundingLocations = getSurroundingLocations(horIndex, verIndex);
     const bombCount = surroundingLocations.filter(
-      (location) => bombMatrix[location.yCor][location.xCor].hasBomb
+      (location) => squares[location.yCor][location.xCor].hasBomb
     ).length;
 
     return bombCount;
   }
 
-  function revealUnflaggedBombs(bombMatrix) {
-    bombMatrix.map((row) => {
+  function revealUnflaggedBombs(squares) {
+    squares.map((row) => {
       row
         .filter((square) => square.hasBomb && !square.hasFlag)
         .map((square) => (square.isClicked = true));
     });
   }
 
-  function revealFalselyFlaggedSquares(bombMatrix) {
-    bombMatrix.map((row) => {
+  function revealFalselyFlaggedSquares(squares) {
+    squares.map((row) => {
       row
         .filter((square) => !square.hasBomb && square.hasFlag)
         .map((square) => (square.hasFalseFlag = true));
@@ -175,8 +174,8 @@ function App() {
       return;
     }
 
-    let newBombMatrix = [...bombMatrix];
-    const clickedSquare = newBombMatrix[verIndex][horIndex];
+    let newSquares = [...squares];
+    const clickedSquare = newSquares[verIndex][horIndex];
 
     if (clickedSquare.isClicked || clickedSquare.hasFlag) {
       return;
@@ -187,13 +186,13 @@ function App() {
     if (clickedSquare.hasBomb) {
       setPlayWon(false);
       endPlay(timerInterval);
-      revealUnflaggedBombs(newBombMatrix);
-      revealFalselyFlaggedSquares(newBombMatrix);
-      setBombMatrix(newBombMatrix);
+      revealUnflaggedBombs(newSquares);
+      revealFalselyFlaggedSquares(newSquares);
+      setSquares(newSquares);
       return;
     }
 
-    const noHiddenBombRows = newBombMatrix.filter((row) => {
+    const noHiddenBombRows = newSquares.filter((row) => {
       const noHiddenBombSquares = row.filter(
         (square) => !square.hasBomb && !square.isClicked
       );
@@ -211,9 +210,9 @@ function App() {
       setPlayInProgress(true);
     }
 
-    setBombMatrix(newBombMatrix);
+    setSquares(newSquares);
 
-    if (countBombs(bombMatrix, horIndex, verIndex) === 0) {
+    if (countBombs(squares, horIndex, verIndex) === 0) {
       const surroundingLocations = getSurroundingLocations(horIndex, verIndex);
       surroundingLocations.forEach((location) =>
         handleSquareClick(location.xCor, location.yCor, true)
@@ -228,8 +227,8 @@ function App() {
       return;
     }
 
-    let newBombMatrix = [...bombMatrix];
-    const clickedSquare = newBombMatrix[verIndex][horIndex];
+    let newSquares = [...squares];
+    const clickedSquare = newSquares[verIndex][horIndex];
 
     if (clickedSquare.isClicked) {
       return;
@@ -242,16 +241,16 @@ function App() {
       : flagsRemaining + 1;
     setFlagsRemaining(newFlagsRemaining);
 
-    setBombMatrix(newBombMatrix);
+    setSquares(newSquares);
   }
 
   function createBoard(isValidGamePage) {
     if (!isValidGamePage) {
       return;
     }
-    const bombMatrix = createBombMatrix();
+    const squares = createSquares();
 
-    setBombMatrix(bombMatrix);
+    setSquares(squares);
   }
 
   function submitTime(seconds) {
@@ -262,6 +261,7 @@ function App() {
     };
     addPlay(play);
     setButtonText("Time Submitted");
+    setTimeSubmitted(true);
   }
 
   useEffect(() => {
@@ -279,7 +279,7 @@ function App() {
       <div className="game-container">
         <Board
           difficulty={difficulty}
-          bombMatrix={bombMatrix}
+          squares={squares}
           countBombs={countBombs}
           handleSquareClick={handleSquareClick}
           handleFlagClick={handleFlagClick}
@@ -297,6 +297,7 @@ function App() {
           playWon={playWon}
           submitTime={submitTime}
           buttonText={buttonText}
+          timeSubmitted={timeSubmitted}
         />
       </div>
     </div>

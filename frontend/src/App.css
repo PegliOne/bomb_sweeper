@@ -93,7 +93,7 @@ section.timer {
 section.timer > button,
 section.timer > div > button {
   margin-left: 12px;
-  padding: 4px 12px;
+  padding: 4px 16px;
   background-color: #212529;
   color: white;
   border: none;
@@ -104,10 +104,6 @@ section.timer > button:hover,
 section.timer > div > button:hover {
   background-color: #6c757d;
   cursor: pointer;
-}
-
-section.timer > div.timer-submit {
-  width: 140px;
 }
 
 section.timer > span {
@@ -122,6 +118,16 @@ section.timer > span > span.timer-time {
   display: inline-block;
   width: 20px;
   font-weight: 500;
+}
+
+section.timer > div.timer-submit > button {
+  width: 148px;
+  padding: 4px 16px;
+}
+
+section.timer > div.timer-submit > button.submitted {
+  background-color: #586066;
+  cursor: default;
 }
 
 p.error-message {

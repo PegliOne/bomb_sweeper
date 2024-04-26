@@ -2,7 +2,7 @@ import Bomb from "./board-components/Bomb";
 
 const Board = ({
   difficulty,
-  bombMatrix,
+  squares,
   handleSquareClick,
   handleFlagClick,
   countBombs,
@@ -18,7 +18,7 @@ const Board = ({
 
   return (
     <section className={`board ${difficulty === "hard" ? "large" : ""}`}>
-      {bombMatrix.map((row, verIndex) => {
+      {squares.map((row, verIndex) => {
         return (
           <div key={verIndex}>
             {row.map((square, horIndex) => {
@@ -34,10 +34,10 @@ const Board = ({
                   <span>
                     {square.hasBomb ? (
                       <Bomb />
-                    ) : countBombs(bombMatrix, horIndex, verIndex) === 0 ? (
+                    ) : countBombs(squares, horIndex, verIndex) === 0 ? (
                       ""
                     ) : (
-                      countBombs(bombMatrix, horIndex, verIndex)
+                      countBombs(squares, horIndex, verIndex)
                     )}
                   </span>
                 </div>

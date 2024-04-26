@@ -1,5 +1,6 @@
 class PlaysController < ApplicationController
   include ApplicationHelper
+  skip_before_action :verify_authenticity_token, only: :create
   
   def index
     @easy_plays = filter_plays_by_difficulty(winning_plays, "Easy")
