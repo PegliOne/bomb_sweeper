@@ -59,6 +59,7 @@ function App() {
   function resetPlay() {
     setPlayInProgress(false);
     setPlayComplete(false);
+    setPlayWon(false);
     resetTimer();
     createBoard(isValidGamePage, boardSizes, difficulty);
     setButtonText("Submit Time");

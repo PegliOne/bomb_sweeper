@@ -15,7 +15,7 @@
         <tr>
           <td class="px-4"><%= User.find(play.user_id).username %></td>
           <td class="px-4"><%= play.time_in_seconds %>s</td>
-          <td class="px-4"><%= play.difficulty %></td>
+          <td class="px-4"><%= play.difficulty.capitalize %></td>
           <td class="px-4 text-nowrap"><%= convert_time(play.created_at) %></td>
         </tr>
       <% end %>
