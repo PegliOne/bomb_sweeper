@@ -119,7 +119,9 @@ function App() {
       const xCor = Math.floor(Math.random() * boardSizes[difficulty][0]);
       const yCor = Math.floor(Math.random() * boardSizes[difficulty][1]);
       const bombLocation = [xCor, yCor].toString();
-      bombLocations.push(bombLocation);
+      if (!bombLocations.includes(bombLocation)) {
+        bombLocations.push(bombLocation);
+      }
     }
 
     return bombLocations;
