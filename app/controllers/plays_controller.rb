@@ -3,9 +3,9 @@ class PlaysController < ApplicationController
   skip_before_action :verify_authenticity_token, only: :create
   
   def index
-    @easy_plays = filter_plays_by_difficulty(winning_plays, "Easy")
-    @medium_plays = filter_plays_by_difficulty(winning_plays, "Medium")
-    @hard_plays = filter_plays_by_difficulty(winning_plays, "Hard")
+    @easy_plays = filter_plays_by_difficulty(winning_plays, "easy")
+    @medium_plays = filter_plays_by_difficulty(winning_plays, "medium")
+    @hard_plays = filter_plays_by_difficulty(winning_plays, "hard")
   end 
 
   def create
