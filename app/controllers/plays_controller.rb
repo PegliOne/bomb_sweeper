@@ -10,11 +10,11 @@ class PlaysController < ApplicationController
 
   def create
     user = fetch_user
-    play = Play.create(play_params)
-    unless user.nil?  
+    unless user.nil? 
+      play = Play.create(play_params)   
       play.user_id = user.id
       play.save
-    end  
+    end
   end
   
   private
