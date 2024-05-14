@@ -47,7 +47,8 @@ function App() {
     clearInterval(timerInterval);
     setPlayInProgress(false);
     setSeconds(0);
-    setFlagsRemaining(bombCount);
+    setTimeSubmitted(false);
+    setButtonText("Submit Time");
   }
 
   function endPlay(timerInterval) {
@@ -62,7 +63,7 @@ function App() {
     setPlayWon(false);
     resetTimer();
     createBoard(isValidGamePage, boardSizes, difficulty);
-    setButtonText("Submit Time");
+    setFlagsRemaining(bombCount);
   }
 
   function checkValidLocation(location) {
