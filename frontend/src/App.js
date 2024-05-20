@@ -25,7 +25,6 @@ function App() {
   const [playComplete, setPlayComplete] = useState(false);
   const [playWon, setPlayWon] = useState(false);
   const [squares, setSquares] = useState([]);
-  const [buttonText, setButtonText] = useState("Submit Time");
   const [timeSubmitted, setTimeSubmitted] = useState(false);
 
   function getDifficulty() {
@@ -48,7 +47,6 @@ function App() {
     setPlayInProgress(false);
     setSeconds(0);
     setTimeSubmitted(false);
-    setButtonText("Submit Time");
   }
 
   function endPlay(timerInterval) {
@@ -264,7 +262,6 @@ function App() {
       seconds: seconds,
     };
     addPlay(play);
-    setButtonText("Time Submitted");
     setTimeSubmitted(true);
   }
 
@@ -300,7 +297,6 @@ function App() {
           resetPlay={resetPlay}
           playWon={playWon}
           submitTime={submitTime}
-          buttonText={buttonText}
           timeSubmitted={timeSubmitted}
         />
       </div>

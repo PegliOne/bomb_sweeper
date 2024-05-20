@@ -1,11 +1,4 @@
-const Timer = ({
-  seconds,
-  resetPlay,
-  playWon,
-  submitTime,
-  buttonText,
-  timeSubmitted,
-}) => {
+const Timer = ({ seconds, resetPlay, playWon, submitTime, timeSubmitted }) => {
   let submitButtonClass = "";
 
   if (timeSubmitted) submitButtonClass += "submitted";
@@ -31,7 +24,7 @@ const Timer = ({
             className={submitButtonClass}
             onClick={() => submitTime(seconds)}
           >
-            {buttonText}
+            {timeSubmitted ? "Time Submitted" : "Submit Time"}
           </button>
         )}
       </div>
