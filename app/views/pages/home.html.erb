@@ -1,7 +1,7 @@
 <h2>Instructions</h2>
 
-<section class="text-center">
-  <div class="d-flex flex-column mb-4">
+<section class="w-75 text-center">
+  <div class="d-flex flex-column mb-5 text-wrap">
     <p>Bombsweeper works just like Minesweeper only with bombs instead of mines and the option to save and track scores :)</p>
 
     <p>Left click on a square to reveal it. Revealing the first square starts the timer (unless it's a bomb!)</p> 
@@ -23,10 +23,10 @@
 
   <h3>Difficulty Settings</h3>
 
-  <ul class="d-flex justify-content-around mt-4 mb-5 list-unstyled">
-    <li class="<%= @difficulty == "easy" ? "selected" : "" %>"><%= link_to "Easy Board", game_path("easy"), class: "btn btn-dark px-4 border-0" %></li>
-    <li class="<%= @difficulty == "medium" ? "selected" : "" %>"><%= link_to "Medium Board", game_path("medium"), class: "btn btn-dark px-4 border-0" %></li>
-    <li class="<%= @difficulty == "hard" ? "selected" : "" %>"><%= link_to "Hard Board", game_path("hard"), class: "btn btn-dark px-4 border-0" %></li>
+  <ul class="d-flex justify-content-center mt-4 mb-5 list-unstyled">
+    <li class="<%= @difficulty == "easy" ? "selected" : "" %>"><%= link_to "Easy Board", game_path("easy"), class: "btn btn-dark mx-3 px-4 border-0" %></li>
+    <li class="<%= @difficulty == "medium" ? "selected" : "" %>"><%= link_to "Medium Board", game_path("medium"), class: "btn btn-dark mx-3 px-4 border-0" %></li>
+    <li class="<%= @difficulty == "hard" ? "selected" : "" %>"><%= link_to "Hard Board", game_path("hard"), class: "btn btn-dark mx-3 px-4 border-0" %></li>
   </ul>
 
   <h3 class="mb-4"><%= @difficulty.capitalize %> Board</h3>

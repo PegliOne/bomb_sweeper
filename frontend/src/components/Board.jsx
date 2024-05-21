@@ -11,9 +11,26 @@ const Board = ({
   function getSquareClass(square) {
     if (square.isClicked) {
       return "";
+    } else if (square.hasFalseFlag) {
+      return "falsely-flagged";
+    } else if (square.hasFlag) {
+      return "flagged";
+    } else {
+      return "hidden";
     }
+  }
 
-    return square.hasFlag ? "flagged" : "hidden";
+  function getSquareContent(square, horIndex, verIndex) {
+    const surroundingBombCount = countBombs(squares, horIndex, verIndex);
+    if (square.hasBomb) {
+      return <Bomb />;
+    } else if (square.hasFalseFlag) {
+      return "X";
+    } else if (surroundingBombCount === 0) {
+      return "";
+    } else {
+      return surroundingBombCount;
+    }
   }
 
   return (
@@ -27,19 +44,11 @@ const Board = ({
                   key={horIndex}
                   className={`${getSquareClass(square)} ${
                     isActive ? "clickable" : ""
-                  }${square.hasFalseFlag ? "falsely-flagged" : ""}`}
+                  }`}
                   onClick={() => handleSquareClick(horIndex, verIndex)}
                   onContextMenu={(e) => handleFlagClick(e, horIndex, verIndex)}
                 >
-                  <span>
-                    {square.hasBomb ? (
-                      <Bomb />
-                    ) : countBombs(squares, horIndex, verIndex) === 0 ? (
-                      ""
-                    ) : (
-                      countBombs(squares, horIndex, verIndex)
-                    )}
-                  </span>
+                  <span>{getSquareContent(square, horIndex, verIndex)}</span>
                 </div>
               );
             })}

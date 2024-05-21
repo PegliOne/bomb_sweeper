@@ -24,9 +24,9 @@ class UsersController < ApplicationController
     end  
     @quickest_winning_play_time = quickest_winning_play&.time_in_seconds
     @quickest_winning_play_difficulty = quickest_winning_play&.difficulty
-    @easy_plays = filter_plays_by_difficulty(winning_plays, "Easy")
-    @medium_plays = filter_plays_by_difficulty(winning_plays, "Medium")
-    @hard_plays = filter_plays_by_difficulty(winning_plays, "Hard")
+    @easy_plays = filter_plays_by_difficulty(winning_plays, "easy")
+    @medium_plays = filter_plays_by_difficulty(winning_plays, "medium")
+    @hard_plays = filter_plays_by_difficulty(winning_plays, "hard")
   end  
 
   private

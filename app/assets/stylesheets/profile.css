@@ -1,4 +1,4 @@
-body > main > section > div > p {
+body > main > section.details > div > p {
   white-space: nowrap;
 }
 
@@ -12,7 +12,7 @@ body > main > section > div > p > span {
   section.details {
     flex-direction: column;
     align-items: center;
-  } 
+  }
 
   section.details > div {
     align-items: center;

@@ -8,6 +8,6 @@ module ApplicationHelper
   end  
 
   def filter_plays_by_difficulty(plays, difficulty)
-    plays.filter{|play| play.difficulty == difficulty}
+    plays.filter{|play| play.difficulty.downcase == difficulty}.take(10)
   end  
 end

@@ -44,8 +44,14 @@ section.board > div > div.flagged {
   background-size: cover;
 }
 
-section.board > div > div.flagged.falsely-flagged {
+section.board > div > div.falsely-flagged {
+  background-color: rgb(25, 135, 84);
   border: 2px red solid;
+}
+
+section.board > div > div.falsely-flagged > span {
+  color: red;
+  font-weight: 600;
 }
 
 div.flag-counter {
@@ -88,6 +94,7 @@ div.results-container p.results.lose {
 section.timer {
   display: flex;
   align-items: center;
+  font-size: 1rem;
 }
 
 section.timer > button,

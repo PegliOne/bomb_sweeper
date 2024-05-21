@@ -25,7 +25,6 @@ function App() {
   const [playComplete, setPlayComplete] = useState(false);
   const [playWon, setPlayWon] = useState(false);
   const [squares, setSquares] = useState([]);
-  const [buttonText, setButtonText] = useState("Submit Time");
   const [timeSubmitted, setTimeSubmitted] = useState(false);
 
   function getDifficulty() {
@@ -47,7 +46,7 @@ function App() {
     clearInterval(timerInterval);
     setPlayInProgress(false);
     setSeconds(0);
-    setFlagsRemaining(bombCount);
+    setTimeSubmitted(false);
   }
 
   function endPlay(timerInterval) {
@@ -59,9 +58,10 @@ function App() {
   function resetPlay() {
     setPlayInProgress(false);
     setPlayComplete(false);
+    setPlayWon(false);
     resetTimer();
     createBoard(isValidGamePage, boardSizes, difficulty);
-    setButtonText("Submit Time");
+    setFlagsRemaining(bombCount);
   }
 
   function checkValidLocation(location) {
@@ -119,7 +119,9 @@ function App() {
       const xCor = Math.floor(Math.random() * boardSizes[difficulty][0]);
       const yCor = Math.floor(Math.random() * boardSizes[difficulty][1]);
       const bombLocation = [xCor, yCor].toString();
-      bombLocations.push(bombLocation);
+      if (!bombLocations.includes(bombLocation)) {
+        bombLocations.push(bombLocation);
+      }
     }
 
     return bombLocations;
@@ -260,7 +262,6 @@ function App() {
       seconds: seconds,
     };
     addPlay(play);
-    setButtonText("Time Submitted");
     setTimeSubmitted(true);
   }
 
@@ -296,7 +297,6 @@ function App() {
           resetPlay={resetPlay}
           playWon={playWon}
           submitTime={submitTime}
-          buttonText={buttonText}
           timeSubmitted={timeSubmitted}
         />
       </div>
