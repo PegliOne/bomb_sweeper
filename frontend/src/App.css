@@ -20,8 +20,40 @@ section.board > div > div {
   width: 28px;
   height: 28px;
   border: 1px solid black;
-  color: #9a0202;
+
   background-color: rgb(200, 242, 200);
+}
+
+section.board > div > div.one {
+  color: blue;
+}
+
+section.board > div > div.two {
+  color: green;
+}
+
+section.board > div > div.three {
+  color: red;
+}
+
+section.board > div > div.four {
+  color: rgb(1, 1, 90);
+}
+
+section.board > div > div.five {
+  color: rgb(82, 41, 12);
+}
+
+section.board > div > div.six {
+  color: teal;
+}
+
+section.board > div > div.seven {
+  color: rgb(70, 1, 70);
+}
+
+section.board > div > div.eight {
+  color: grey;
 }
 
 section.board > div > div.hidden,
