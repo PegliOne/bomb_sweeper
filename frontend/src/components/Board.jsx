@@ -20,6 +20,28 @@ const Board = ({
     }
   }
 
+  function getSquareNumClass(square, horIndex, verIndex) {
+    const surroundingBombCount = countBombs(squares, horIndex, verIndex);
+    switch (surroundingBombCount) {
+      case 1:
+        return "one";
+      case 2:
+        return "two";
+      case 3:
+        return "three";
+      case 4:
+        return "four";
+      case 5:
+        return "five";
+      case 6:
+        return "six";
+      case 7:
+        return "seven";
+      case 8:
+        return "eight";
+    }
+  }
+
   function getSquareContent(square, horIndex, verIndex) {
     const surroundingBombCount = countBombs(squares, horIndex, verIndex);
     if (square.hasBomb) {
@@ -42,9 +64,11 @@ const Board = ({
               return (
                 <div
                   key={horIndex}
-                  className={`${getSquareClass(square)} ${
-                    isActive ? "clickable" : ""
-                  }`}
+                  className={`${getSquareClass(square)} ${getSquareNumClass(
+                    square,
+                    horIndex,
+                    verIndex
+                  )} ${isActive ? "clickable" : ""}`}
                   onClick={() => handleSquareClick(horIndex, verIndex)}
                   onContextMenu={(e) => handleFlagClick(e, horIndex, verIndex)}
                 >
