@@ -18,6 +18,7 @@ const Timer = ({ seconds, resetPlay, playWon, submitTime, timeSubmitted }) => {
         </span>
       </span>
       <button onClick={resetPlay}>Reset</button>
+      <button>Pause</button>
       <div className="timer-submit">
         {playWon && (
           <button
