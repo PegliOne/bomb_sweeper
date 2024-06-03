@@ -20,7 +20,7 @@ const Board = ({
     }
   }
 
-  function getSquareNumClass(square, horIndex, verIndex) {
+  function getSquareNumClass(horIndex, verIndex) {
     const surroundingBombCount = countBombs(squares, horIndex, verIndex);
     switch (surroundingBombCount) {
       case 1:
