@@ -8,7 +8,7 @@ const Board = ({
   countBombs,
   isActive,
 }) => {
-  function getSquareClass(square) {
+  function getDisplayState(square) {
     if (square.isClicked) {
       return "";
     } else if (square.hasFalseFlag) {
@@ -20,7 +20,7 @@ const Board = ({
     }
   }
 
-  function getSquareNumClass(horIndex, verIndex) {
+  function getNumClass(horIndex, verIndex) {
     const surroundingBombCount = countBombs(squares, horIndex, verIndex);
     switch (surroundingBombCount) {
       case 1:
@@ -40,6 +40,12 @@ const Board = ({
       case 8:
         return "eight";
     }
+  }
+
+  function getSquareClass(square, horIndex, verIndex) {
+    const displayState = getDisplayState(square);
+    const numClass = getNumClass(horIndex, verIndex);
+    return `${displayState} ${numClass} ${isActive ? "clickable" : ""}`;
   }
 
   function getSquareContent(square, horIndex, verIndex) {
@@ -64,11 +70,7 @@ const Board = ({
               return (
                 <div
                   key={horIndex}
-                  className={`${getSquareClass(square)} ${getSquareNumClass(
-                    square,
-                    horIndex,
-                    verIndex
-                  )} ${isActive ? "clickable" : ""}`}
+                  className={getSquareClass(square, horIndex, verIndex)}
                   onClick={() => handleSquareClick(horIndex, verIndex)}
                   onContextMenu={(e) => handleFlagClick(e, horIndex, verIndex)}
                 >
