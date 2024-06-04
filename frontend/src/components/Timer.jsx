@@ -1,4 +1,11 @@
-const Timer = ({ seconds, resetPlay, playWon, submitTime, timeSubmitted }) => {
+const Timer = ({
+  seconds,
+  resetPlay,
+  pausePlay,
+  playWon,
+  submitTime,
+  timeSubmitted,
+}) => {
   let submitButtonClass = "";
 
   if (timeSubmitted) submitButtonClass += "submitted";
@@ -18,7 +25,7 @@ const Timer = ({ seconds, resetPlay, playWon, submitTime, timeSubmitted }) => {
         </span>
       </span>
       <button onClick={resetPlay}>Reset</button>
-      <button>Pause</button>
+      <button onClick={pausePlay}>Pause</button>
       <div className="timer-submit">
         {playWon && (
           <button

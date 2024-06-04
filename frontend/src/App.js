@@ -64,6 +64,10 @@ function App() {
     setFlagsRemaining(bombCount);
   }
 
+  function pausePlay() {
+    clearInterval(timerInterval);
+  }
+
   function checkValidLocation(location) {
     return (
       location.xCor > -1 &&
@@ -295,6 +299,7 @@ function App() {
         <Timer
           seconds={seconds}
           resetPlay={resetPlay}
+          pausePlay={pausePlay}
           playWon={playWon}
           submitTime={submitTime}
           timeSubmitted={timeSubmitted}
