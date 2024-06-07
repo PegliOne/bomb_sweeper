@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     @user = user
     @win_count = winning_plays.count
     unless @win_count == 0
-      @win_percentage = (@win_count / play_count) * 100
+      @win_percentage = ((@win_count / play_count) * 100).round(2)
     end  
     @quickest_winning_play_time = quickest_winning_play&.time_in_seconds
     @quickest_winning_play_difficulty = quickest_winning_play&.difficulty
