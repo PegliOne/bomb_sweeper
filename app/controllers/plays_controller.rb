@@ -6,6 +6,11 @@ class PlaysController < ApplicationController
     @easy_plays = filter_plays_by_difficulty(winning_plays, "easy")
     @medium_plays = filter_plays_by_difficulty(winning_plays, "medium")
     @hard_plays = filter_plays_by_difficulty(winning_plays, "hard")
+    if @easy_plays.empty? && @medium_plays.empty? && @hard_plays.empty?
+      @intro_text = "No times have been submitted yet."
+    elsif
+      @intro_text = "The top scoring plays are the successful plays with the shortest times."  
+    end    
   end 
 
   def create

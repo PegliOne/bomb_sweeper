@@ -1,6 +1,6 @@
 <h2>Scoreboard</h2>
 
-<p>The top scoring plays are the successful plays with the shortest times.</p>
+<p><%= @intro_text %></p>
 
 <%= render partial: "shared/score_tables/score_tables", locals: { easy_plays: @easy_plays, medium_plays: @medium_plays, hard_plays: @hard_plays } %>
 
