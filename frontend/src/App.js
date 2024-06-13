@@ -33,11 +33,11 @@ function App() {
     return path === "/" ? "medium" : path.slice(6).toLowerCase();
   }
 
-  function startTimer() {
+  function startTimer(presetSeconds = 0) {
     const startTime = new Date();
 
     const timerInterval = setInterval(() => {
-      setSeconds(Math.floor((new Date() - startTime) / 1000));
+      setSeconds(Math.floor((new Date() - startTime) / 1000) + presetSeconds);
     }, 1000);
 
     setTimerInterval(timerInterval);
@@ -66,8 +66,13 @@ function App() {
   }
 
   function pausePlay() {
-    clearInterval(timerInterval);
-    setPlayPaused(true);
+    if (!playPaused) {
+      clearInterval(timerInterval);
+      setPlayPaused(true);
+    } else {
+      startTimer(seconds);
+      setPlayPaused(false);
+    }
   }
 
   function checkValidLocation(location) {
