@@ -22,6 +22,7 @@ function App() {
   const [flagsRemaining, setFlagsRemaining] = useState(bombCount);
   const [playInProgress, setPlayInProgress] = useState(false);
   const [timerInterval, setTimerInterval] = useState(null);
+  const [playPaused, setPlayPaused] = useState(false);
   const [playComplete, setPlayComplete] = useState(false);
   const [playWon, setPlayWon] = useState(false);
   const [squares, setSquares] = useState([]);
@@ -66,6 +67,7 @@ function App() {
 
   function pausePlay() {
     clearInterval(timerInterval);
+    setPlayPaused(true);
   }
 
   function checkValidLocation(location) {
@@ -300,6 +302,7 @@ function App() {
           seconds={seconds}
           resetPlay={resetPlay}
           pausePlay={pausePlay}
+          playPaused={playPaused}
           playWon={playWon}
           submitTime={submitTime}
           timeSubmitted={timeSubmitted}
