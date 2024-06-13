@@ -178,7 +178,7 @@ function App() {
   }
 
   function handleSquareClick(horIndex, verIndex, isAutoClick = false) {
-    if (playComplete) {
+    if (playComplete || playPaused) {
       return;
     }
 
@@ -290,7 +290,7 @@ function App() {
           countBombs={countBombs}
           handleSquareClick={handleSquareClick}
           handleFlagClick={handleFlagClick}
-          isActive={!playComplete}
+          isActive={!playComplete && !playPaused}
         />
         <div className="flag-counter">
           <span className="flag-image"></span>: {flagsRemaining}
