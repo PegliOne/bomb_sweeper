@@ -58,6 +58,7 @@ function App() {
 
   function resetPlay() {
     setPlayInProgress(false);
+    setPlayPaused(false);
     setPlayComplete(false);
     setPlayWon(false);
     resetTimer();
