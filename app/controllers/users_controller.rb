@@ -61,7 +61,7 @@ class UsersController < ApplicationController
   end  
 
   def winning_plays
-    user.plays.filter{ |play| play.is_win }
+    user.plays.filter{ |play| play.is_win }.sort_by(&:time_in_seconds)
   end 
 
   def play_count

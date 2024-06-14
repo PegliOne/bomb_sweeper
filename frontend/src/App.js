@@ -22,6 +22,7 @@ function App() {
   const [flagsRemaining, setFlagsRemaining] = useState(bombCount);
   const [playInProgress, setPlayInProgress] = useState(false);
   const [timerInterval, setTimerInterval] = useState(null);
+  const [playPaused, setPlayPaused] = useState(false);
   const [playComplete, setPlayComplete] = useState(false);
   const [playWon, setPlayWon] = useState(false);
   const [squares, setSquares] = useState([]);
@@ -32,11 +33,11 @@ function App() {
     return path === "/" ? "medium" : path.slice(6).toLowerCase();
   }
 
-  function startTimer() {
+  function startTimer(presetSeconds = 0) {
     const startTime = new Date();
 
     const timerInterval = setInterval(() => {
-      setSeconds(Math.floor((new Date() - startTime) / 1000));
+      setSeconds(Math.floor((new Date() - startTime) / 1000) + presetSeconds);
     }, 1000);
 
     setTimerInterval(timerInterval);
@@ -57,6 +58,7 @@ function App() {
 
   function resetPlay() {
     setPlayInProgress(false);
+    setPlayPaused(false);
     setPlayComplete(false);
     setPlayWon(false);
     resetTimer();
@@ -65,7 +67,13 @@ function App() {
   }
 
   function pausePlay() {
-    clearInterval(timerInterval);
+    if (!playPaused) {
+      clearInterval(timerInterval);
+      setPlayPaused(true);
+    } else {
+      startTimer(seconds);
+      setPlayPaused(false);
+    }
   }
 
   function checkValidLocation(location) {
@@ -176,7 +184,7 @@ function App() {
   }
 
   function handleSquareClick(horIndex, verIndex, isAutoClick = false) {
-    if (playComplete) {
+    if (playComplete || playPaused) {
       return;
     }
 
@@ -288,7 +296,7 @@ function App() {
           countBombs={countBombs}
           handleSquareClick={handleSquareClick}
           handleFlagClick={handleFlagClick}
-          isActive={!playComplete}
+          isActive={!playComplete && !playPaused}
         />
         <div className="flag-counter">
           <span className="flag-image"></span>: {flagsRemaining}
@@ -300,6 +308,7 @@ function App() {
           seconds={seconds}
           resetPlay={resetPlay}
           pausePlay={pausePlay}
+          playPaused={playPaused}
           playWon={playWon}
           submitTime={submitTime}
           timeSubmitted={timeSubmitted}
