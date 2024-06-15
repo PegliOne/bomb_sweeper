@@ -23,7 +23,7 @@ class UsersController < ApplicationController
       @win_percentage = ((@win_count / play_count) * 100).round(2)
     end
     @quickest_winning_play_time = quickest_winning_play&.time_in_seconds
-    @quickest_winning_play_difficulty = quickest_winning_play&.difficulty.capitalize
+    @quickest_winning_play_difficulty = quickest_winning_play&.difficulty&.capitalize
     @easy_plays = filter_plays_by_difficulty(winning_plays, "easy")
     @medium_plays = filter_plays_by_difficulty(winning_plays, "medium")
     @hard_plays = filter_plays_by_difficulty(winning_plays, "hard")

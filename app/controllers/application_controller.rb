@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   end  
 
   def get_winning_plays(plays)
-    plays.filter(&:is_win).sort_by(&:time_in_seconds)
+    plays.filter{ |play| play.is_win && play.is_displayed }.sort_by(&:time_in_seconds)
   end  
 
   private
