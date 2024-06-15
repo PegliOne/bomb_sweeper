@@ -25,7 +25,7 @@ class PlaysController < ApplicationController
   private
 
   def winning_plays
-    Play.all.filter(&:is_win).sort_by(&:time_in_seconds)
+    get_winning_plays(Play.all)
   end  
 
   def play_params

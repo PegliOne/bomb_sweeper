@@ -9,6 +9,10 @@ class ApplicationController < ActionController::Base
     redirect_to "/" unless session[:user_id].nil?
   end  
 
+  def get_winning_plays(plays)
+    plays.filter(&:is_win).sort_by(&:time_in_seconds)
+  end  
+
   private
 
   def fetch_user
