@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Board from "./components/Board";
 import Results from "./components/Results";
 import Timer from "./components/Timer";
-import { addPlay } from "./services/play-service";
+import { addPlay, displayPlay } from "./services/play-service";
 
 function App() {
   const boardSizes = {
@@ -268,12 +268,13 @@ function App() {
   }
 
   function submitTime(seconds) {
-    const play = {
-      difficulty: difficulty,
-      playWon: true,
-      seconds: seconds,
-    };
-    addPlay(play);
+    // const play = {
+    //   difficulty: difficulty,
+    //   playWon: true,
+    //   seconds: seconds,
+    // };
+    //addPlay(play);
+    displayPlay();
     setTimeSubmitted(true);
   }
 
