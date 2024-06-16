@@ -50,10 +50,16 @@ function App() {
     setTimeSubmitted(false);
   }
 
-  function endPlay(timerInterval) {
+  function endPlay(wasWin, timerInterval) {
     setPlayInProgress(false);
     setPlayComplete(true);
     clearInterval(timerInterval);
+    const play = {
+      difficulty: difficulty,
+      playWon: wasWin,
+      seconds: seconds,
+    };
+    addPlay(play);
   }
 
   function resetPlay() {
@@ -199,7 +205,7 @@ function App() {
 
     if (clickedSquare.hasBomb) {
       setPlayWon(false);
-      endPlay(timerInterval);
+      endPlay(false, timerInterval);
       revealUnflaggedBombs(newSquares);
       revealFalselyFlaggedSquares(newSquares);
       setSquares(newSquares);
@@ -215,7 +221,7 @@ function App() {
 
     if (noHiddenBombRows.length < 1) {
       setPlayWon(true);
-      endPlay(timerInterval);
+      endPlay(true, timerInterval);
       return;
     }
 
@@ -267,13 +273,7 @@ function App() {
     setSquares(squares);
   }
 
-  function submitTime(seconds) {
-    // const play = {
-    //   difficulty: difficulty,
-    //   playWon: true,
-    //   seconds: seconds,
-    // };
-    //addPlay(play);
+  function submitTime() {
     displayPlay();
     setTimeSubmitted(true);
   }
