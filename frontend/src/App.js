@@ -297,6 +297,7 @@ function App() {
           countBombs={countBombs}
           handleSquareClick={handleSquareClick}
           handleFlagClick={handleFlagClick}
+          isPaused={playPaused}
           isActive={!playComplete && !playPaused}
         />
         <div className="flag-counter">
