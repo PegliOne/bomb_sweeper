@@ -131,6 +131,7 @@ section.timer {
 
 section.timer > button,
 section.timer > div > button {
+  width: 148px;
   margin-left: 12px;
   padding: 4px 16px;
   background-color: #212529;

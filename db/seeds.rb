@@ -7,12 +7,12 @@ u2 = User.create :username => "BFG9K", :email => "jackson@gmail.com", :password 
 puts "#{ User.count } users."
 
 Play.destroy_all
-p1 = Play.create :difficulty => "easy", :is_win => true, :time_in_seconds => 20
+p1 = Play.create :difficulty => "easy", :is_win => true, :time_in_seconds => 20, :is_displayed => true
 p2 = Play.create :difficulty => "easy", :is_win => true, :time_in_seconds => 30
 p3 = Play.create :difficulty => "medium", :is_win => false, :time_in_seconds => 90
-p4 = Play.create :difficulty => "medium", :is_win => true, :time_in_seconds => 105
+p4 = Play.create :difficulty => "medium", :is_win => true, :time_in_seconds => 105, :is_displayed => true
 p5 = Play.create :difficulty => "medium", :is_win => true, :time_in_seconds => 120
-p6 = Play.create :difficulty => "hard", :is_win => true, :time_in_seconds => 420
+p6 = Play.create :difficulty => "hard", :is_win => true, :time_in_seconds => 420, :is_displayed => true
 p7 = Play.create :difficulty => "hard", :is_win => true, :time_in_seconds => 480
 puts "#{ Play.count } plays"
 

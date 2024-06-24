@@ -5,8 +5,14 @@
 <section class="details d-flex justify-content-center w-75 mb-5">
   <div class="d-flex flex-column mx-3">
     <p><span>Email:</span> <%= @user.email %></p>
-    <% if @win_percentage %>
-      <p><span>Win Percentage:</span> <%= @win_percentage %>%</p>
+    <% if @easy_win_percentage %>
+      <p><span>Easy Win Percentage:</span> <%= @easy_win_percentage %>%</p>
+    <% end %>  
+    <% if @medium_win_percentage %>
+      <p><span>Medium Win Percentage:</span> <%= @medium_win_percentage %>%</p>
+    <% end %>  
+    <% if @hard_win_percentage %>
+      <p><span>Hard Win Percentage:</span> <%= @hard_win_percentage %>%</p>
     <% end %>  
   </div>  
   <div class="d-flex flex-column mx-3">

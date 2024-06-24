@@ -1,6 +1,6 @@
 class PlaysController < ApplicationController
   include ApplicationHelper
-  skip_before_action :verify_authenticity_token, only: :create
+  skip_before_action :verify_authenticity_token, only: [:create, :update]
   
   def index
     @easy_plays = filter_plays_by_difficulty(winning_plays, "easy")
@@ -21,11 +21,17 @@ class PlaysController < ApplicationController
       play.save
     end
   end
+
+  def update
+    play = Play.last
+    play.is_displayed = true
+    play.save
+  end  
   
   private
 
   def winning_plays
-    Play.all.filter(&:is_win).sort_by(&:time_in_seconds)
+    get_displayed_plays(Play.all)
   end  
 
   def play_params

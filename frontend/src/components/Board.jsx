@@ -6,10 +6,13 @@ const Board = ({
   handleSquareClick,
   handleFlagClick,
   countBombs,
+  isPaused,
   isActive,
 }) => {
   function getDisplayState(square) {
-    if (square.isClicked) {
+    if (isPaused) {
+      return "hidden";
+    } else if (square.isClicked) {
       return "";
     } else if (square.hasFalseFlag) {
       return "falsely-flagged";

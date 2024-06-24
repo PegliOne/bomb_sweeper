@@ -18,15 +18,14 @@ class UsersController < ApplicationController
 
   def show
     @user = user
-    @win_count = winning_plays.count
-    unless @win_count == 0
-      @win_percentage = ((@win_count / play_count) * 100).round(2)
-    end
     @quickest_winning_play_time = quickest_winning_play&.time_in_seconds
-    @quickest_winning_play_difficulty = quickest_winning_play&.difficulty.capitalize
-    @easy_plays = filter_plays_by_difficulty(winning_plays, "easy")
-    @medium_plays = filter_plays_by_difficulty(winning_plays, "medium")
-    @hard_plays = filter_plays_by_difficulty(winning_plays, "hard")
+    @quickest_winning_play_difficulty = quickest_winning_play&.difficulty&.capitalize
+    @easy_plays = filter_plays_by_difficulty(user.plays, "easy")
+    @medium_plays = filter_plays_by_difficulty(user.plays, "medium")
+    @hard_plays = filter_plays_by_difficulty(user.plays, "hard")
+    @easy_win_percentage = get_win_percentage(@easy_plays)
+    @medium_win_percentage = get_win_percentage(@medium_plays)
+    @hard_win_percentage = get_win_percentage(@hard_plays)
   end  
 
   private
@@ -58,10 +57,16 @@ class UsersController < ApplicationController
 
   def user
     User.find(@current_user.id)
+  end
+
+  def get_win_percentage(plays)
+    unless plays.count == 0
+      (get_all_winning_plays(plays).count * 100 / plays.count).round(2)
+    end
   end  
 
-  def winning_plays
-    user.plays.filter{ |play| play.is_win }.sort_by(&:time_in_seconds)
+  def get_all_winning_plays(plays)
+    plays.filter{ |play| play.is_win }
   end 
 
   def play_count
@@ -69,6 +74,6 @@ class UsersController < ApplicationController
   end
 
   def quickest_winning_play
-    winning_plays.sort_by(&:time_in_seconds).first
+    get_displayed_plays(user.plays).sort_by(&:time_in_seconds).first
   end
 end
