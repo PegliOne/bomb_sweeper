@@ -31,7 +31,7 @@ class PlaysController < ApplicationController
   private
 
   def winning_plays
-    get_winning_plays(Play.all)
+    get_displayed_plays(Play.all)
   end  
 
   def play_params

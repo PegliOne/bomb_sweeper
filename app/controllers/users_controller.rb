@@ -23,15 +23,9 @@ class UsersController < ApplicationController
     @easy_plays = filter_plays_by_difficulty(user.plays, "easy")
     @medium_plays = filter_plays_by_difficulty(user.plays, "medium")
     @hard_plays = filter_plays_by_difficulty(user.plays, "hard")
-    unless @easy_plays.count == 0
-      @easy_win_percentage = (get_all_winning_plays(@easy_plays).count * 100 / @easy_plays.count).round(2)
-    end  
-    unless @medium_plays.count == 0
-      @medium_win_percentage = (get_all_winning_plays(@medium_plays).count * 100 / @medium_plays.count).round(2)
-    end 
-    unless @hard_plays.count == 0
-      @hard_win_percentage = (get_all_winning_plays(@hard_plays).count * 100 / @hard_plays.count).round(2)
-    end 
+    @easy_win_percentage = get_win_percentage(@easy_plays)
+    @medium_win_percentage = get_win_percentage(@medium_plays)
+    @hard_win_percentage = get_win_percentage(@hard_plays)
   end  
 
   private
@@ -63,6 +57,12 @@ class UsersController < ApplicationController
 
   def user
     User.find(@current_user.id)
+  end
+
+  def get_win_percentage(plays)
+    unless plays.count == 0
+      (get_all_winning_plays(plays).count * 100 / plays.count).round(2)
+    end
   end  
 
   def get_all_winning_plays(plays)
@@ -74,6 +74,6 @@ class UsersController < ApplicationController
   end
 
   def quickest_winning_play
-    get_winning_plays(user.plays).sort_by(&:time_in_seconds).first
+    get_displayed_plays(user.plays).sort_by(&:time_in_seconds).first
   end
 end
