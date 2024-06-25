@@ -20,13 +20,16 @@ class UsersController < ApplicationController
     @user = user
     @quickest_winning_play_time = quickest_winning_play&.time_in_seconds
     @quickest_winning_play_difficulty = quickest_winning_play&.difficulty&.capitalize
-    @easy_plays = filter_plays_by_difficulty(user.plays, "easy")
-    @medium_plays = filter_plays_by_difficulty(user.plays, "medium")
-    @hard_plays = filter_plays_by_difficulty(user.plays, "hard")
-    @easy_win_percentage = get_win_percentage(@easy_plays)
-    @medium_win_percentage = get_win_percentage(@medium_plays)
-    @hard_win_percentage = get_win_percentage(@hard_plays)
-  end  
+    easy_plays = filter_plays_by_difficulty(user.plays, "easy")
+    medium_plays = filter_plays_by_difficulty(user.plays, "medium")
+    hard_plays = filter_plays_by_difficulty(user.plays, "hard")
+    @easy_win_percentage = get_win_percentage(easy_plays)
+    @medium_win_percentage = get_win_percentage(medium_plays)
+    @hard_win_percentage = get_win_percentage(hard_plays)
+    @displayed_easy_plays = select_displayed_plays(easy_plays)
+    @displayed_medium_plays = select_displayed_plays(medium_plays)
+    @displayed_hard_plays = select_displayed_plays(hard_plays)
+  end
 
   private
 

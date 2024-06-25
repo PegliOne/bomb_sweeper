@@ -8,10 +8,14 @@ module ApplicationHelper
   end  
 
   def filter_plays_by_difficulty(plays, difficulty)
-    plays.filter{|play| play.difficulty.downcase == difficulty}.take(10)
+    plays.filter{|play| play.difficulty.downcase == difficulty}
   end  
 
   def get_displayed_plays(plays)
-    plays.filter{ |play| play.is_win && play.is_displayed }.sort_by(&:time_in_seconds)
+    plays.filter{ |play| play.is_win && play.is_displayed }
+  end
+
+  def select_displayed_plays(plays)
+    plays.sort_by(&:time_in_seconds).take(10)
   end
 end
