@@ -30,11 +30,11 @@ class PlaysController < ApplicationController
   
   private  
 
-  def play_params
-    params.permit(:difficulty, :is_win,:time_in_seconds)
-  end
-
   def displayed_plays
     get_displayed_plays(Play.all)
+  end
+
+  def play_params
+    params.permit(:difficulty, :is_win,:time_in_seconds)
   end
 end
