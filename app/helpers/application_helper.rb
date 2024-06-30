@@ -12,10 +12,6 @@ module ApplicationHelper
   end  
 
   def get_displayed_plays(plays)
-    plays.filter{ |play| play.is_win && play.is_displayed }
-  end
-
-  def select_displayed_plays(plays)
-    plays.sort_by(&:time_in_seconds).take(10)
+    plays.filter{ |play| play.is_win && play.is_displayed }.sort_by(&:time_in_seconds).take(10)
   end
 end

@@ -26,9 +26,9 @@ class UsersController < ApplicationController
     @easy_win_percentage = get_win_percentage(easy_plays)
     @medium_win_percentage = get_win_percentage(medium_plays)
     @hard_win_percentage = get_win_percentage(hard_plays)
-    @displayed_easy_plays = select_displayed_plays(easy_plays)
-    @displayed_medium_plays = select_displayed_plays(medium_plays)
-    @displayed_hard_plays = select_displayed_plays(hard_plays)
+    @displayed_easy_plays = get_displayed_plays(easy_plays)
+    @displayed_medium_plays = get_displayed_plays(medium_plays)
+    @displayed_hard_plays = get_displayed_plays(hard_plays)
   end
 
   private
