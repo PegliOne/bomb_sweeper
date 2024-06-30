@@ -26,9 +26,9 @@ class UsersController < ApplicationController
     @easy_win_percentage = get_win_percentage(easy_plays)
     @medium_win_percentage = get_win_percentage(medium_plays)
     @hard_win_percentage = get_win_percentage(hard_plays)
-    @displayed_easy_plays = get_displayable_plays(easy_plays)
-    @displayed_medium_plays = get_displayable_plays(medium_plays)
-    @displayed_hard_plays = get_displayable_plays(hard_plays)
+    @displayed_easy_plays = get_and_order_plays(easy_plays)
+    @displayed_medium_plays = get_and_order_plays(medium_plays)
+    @displayed_hard_plays = get_and_order_plays(hard_plays)
   end
 
   private
@@ -63,7 +63,7 @@ class UsersController < ApplicationController
   end
 
   def quickest_winning_play
-    get_displayable_plays(user.plays).sort_by(&:time_in_seconds).first
+    get_and_order_plays(user.plays).sort_by(&:time_in_seconds).first
   end
 
   def get_all_winning_plays(plays)
