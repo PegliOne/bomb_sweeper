@@ -63,7 +63,7 @@ class UsersController < ApplicationController
   end
 
   def quickest_winning_play
-    get_and_order_plays(user.plays).sort_by(&:time_in_seconds).first
+    get_all_winning_plays(user.plays).sort_by(&:time_in_seconds).first
   end
 
   def get_all_winning_plays(plays)
