@@ -3,9 +3,9 @@ class PlaysController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:create, :update]
   
   def index
-    @easy_plays = filter_plays_by_difficulty(winning_plays, "easy")
-    @medium_plays = filter_plays_by_difficulty(winning_plays, "medium")
-    @hard_plays = filter_plays_by_difficulty(winning_plays, "hard")
+    @easy_plays = get_and_order_displayable_plays(filter_plays_by_difficulty(Play.all, "easy"))
+    @medium_plays = get_and_order_displayable_plays(filter_plays_by_difficulty(Play.all, "medium"))
+    @hard_plays = get_and_order_displayable_plays(filter_plays_by_difficulty(Play.all, "hard"))
     if @easy_plays.empty? && @medium_plays.empty? && @hard_plays.empty?
       @intro_text = "No times have been submitted yet."
     elsif
@@ -29,10 +29,6 @@ class PlaysController < ApplicationController
   end  
   
   private
-
-  def winning_plays
-    get_displayed_plays(Play.all)
-  end  
 
   def play_params
     params.permit(:difficulty, :is_win,:time_in_seconds)

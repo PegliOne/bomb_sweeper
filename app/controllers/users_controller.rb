@@ -20,18 +20,22 @@ class UsersController < ApplicationController
     @user = user
     @quickest_winning_play_time = quickest_winning_play&.time_in_seconds
     @quickest_winning_play_difficulty = quickest_winning_play&.difficulty&.capitalize
-    @easy_plays = filter_plays_by_difficulty(user.plays, "easy")
-    @medium_plays = filter_plays_by_difficulty(user.plays, "medium")
-    @hard_plays = filter_plays_by_difficulty(user.plays, "hard")
-    @easy_win_percentage = get_win_percentage(@easy_plays)
-    @medium_win_percentage = get_win_percentage(@medium_plays)
-    @hard_win_percentage = get_win_percentage(@hard_plays)
-  end  
+    easy_plays = filter_plays_by_difficulty(user.plays, "easy")
+    medium_plays = filter_plays_by_difficulty(user.plays, "medium")
+    hard_plays = filter_plays_by_difficulty(user.plays, "hard")
+    @easy_win_percentage = get_win_percentage(easy_plays)
+    @medium_win_percentage = get_win_percentage(medium_plays)
+    @hard_win_percentage = get_win_percentage(hard_plays)
+    @displayed_easy_plays = get_and_order_displayable_plays(easy_plays)
+    @displayed_medium_plays = get_and_order_displayable_plays(medium_plays)
+    @displayed_hard_plays = get_and_order_displayable_plays(hard_plays)
+  end
 
   private
 
-  def user_params
-    params.require(:user).permit(:username, :email, :password, :password_confirmation)
+  def show_error error
+    flash[:error] = error 
+    redirect_to "/sign_up"
   end
 
   def is_user_valid?
@@ -50,30 +54,25 @@ class UsersController < ApplicationController
     return true
   end
 
-  def show_error error
-    flash[:error] = error 
-    redirect_to "/sign_up"
-  end 
+  def user_params
+    params.require(:user).permit(:username, :email, :password, :password_confirmation)
+  end
 
   def user
     User.find(@current_user.id)
   end
 
-  def get_win_percentage(plays)
-    unless plays.count == 0
-      (get_all_winning_plays(plays).count * 100 / plays.count).round(2)
-    end
-  end  
+  def quickest_winning_play
+    get_all_winning_plays(user.plays).sort_by(&:time_in_seconds).first
+  end
 
   def get_all_winning_plays(plays)
     plays.filter{ |play| play.is_win }
   end 
 
-  def play_count
-    user.plays.count.to_f
-  end
-
-  def quickest_winning_play
-    get_displayed_plays(user.plays).sort_by(&:time_in_seconds).first
+  def get_win_percentage(plays)
+    unless plays.count == 0
+      (get_all_winning_plays(plays).count * 100 / plays.count).round(2)
+    end
   end
 end
