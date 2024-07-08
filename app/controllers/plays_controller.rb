@@ -11,7 +11,7 @@ class PlaysController < ApplicationController
     elsif
       @intro_text = "The top scoring plays are the successful plays with the shortest times."  
     end    
-  end 
+  end
 
   def create
     user = fetch_user
