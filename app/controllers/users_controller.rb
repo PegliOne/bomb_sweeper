@@ -29,6 +29,7 @@ class UsersController < ApplicationController
     @displayed_easy_plays = get_and_order_winning_plays(easy_plays)
     @displayed_medium_plays = get_and_order_winning_plays(medium_plays)
     @displayed_hard_plays = get_and_order_winning_plays(hard_plays)
+    @win_count = win_count
   end
 
   private
@@ -75,4 +76,8 @@ class UsersController < ApplicationController
       (get_all_winning_plays(plays).count * 100 / plays.count).round(2)
     end
   end
+
+  def win_count
+    user.plays.filter(&:is_win).count
+  end  
 end
