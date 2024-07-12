@@ -11,9 +11,10 @@ class PlaysController < ApplicationController
     elsif
       @intro_text = "The top scoring plays are the successful plays with the shortest times."  
     end    
-  end 
+  end
 
   def create
+    puts "Add Play"
     user = fetch_user
     unless user.nil? 
       play = Play.create(play_params)   
@@ -24,7 +25,7 @@ class PlaysController < ApplicationController
 
   def update
     play = Play.last
-    play.is_displayed = true
+    play.is_publicly_displayed = true
     play.save
   end  
   

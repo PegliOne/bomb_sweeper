@@ -1,6 +1,10 @@
 <% unless plays.length == 0 %>
   <h3>Fastest <%= difficulty %> Times</h3>
 
+  <% if win_percentage.present? %>
+    <p><span>Win Percentage:</span> <%= win_percentage %>%</p>
+  <% end %>
+
   <table class="table mt-4 mb-5">
     <thead>
       <tr>

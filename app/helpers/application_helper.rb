@@ -11,7 +11,17 @@ module ApplicationHelper
     plays.filter{|play| play.difficulty.downcase == difficulty}
   end
 
+  def get_and_order_winning_plays(plays)
+    order_and_select_plays(plays.filter{ |play| play.is_win })
+  end  
+
   def get_and_order_displayable_plays(plays)
-    plays.filter{ |play| play.is_win && play.is_displayed }.sort_by(&:time_in_seconds).take(10)
+    order_and_select_plays(plays.filter{ |play| play.is_win && play.is_publicly_displayed })
+  end  
+
+  private
+
+  def order_and_select_plays(plays)
+    plays.sort_by(&:time_in_seconds).take(10)
   end  
 end
