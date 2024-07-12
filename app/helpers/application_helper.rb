@@ -16,7 +16,7 @@ module ApplicationHelper
   end  
 
   def get_and_order_displayable_plays(plays)
-    order_and_select_plays(plays.filter{ |play| play.is_win && play.is_displayed })
+    order_and_select_plays(plays.filter{ |play| play.is_win && play.is_publicly_displayed })
   end  
 
   private
