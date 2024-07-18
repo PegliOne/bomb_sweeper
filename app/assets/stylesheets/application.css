@@ -23,6 +23,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+h3 {
+  padding: 12px 0;
+}
+
 p.back-link {
   width: 180px;
 }
