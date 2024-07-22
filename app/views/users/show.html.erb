@@ -8,9 +8,6 @@
   </div>  
   <div class="d-flex flex-column mx-3">
     <p><span>Joined:</span> <%= convert_time_to_date(@user.created_at) %></p>
-    <% if @quickest_winning_play_time %>
-      <p><span>Quickest Time:</span> <%= @quickest_winning_play_time %>s (<%= @quickest_winning_play_difficulty %>)</p>
-    <% end %>
   </div>
 </section>
 
