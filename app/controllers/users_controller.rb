@@ -18,8 +18,6 @@ class UsersController < ApplicationController
 
   def show
     @user = user
-    @quickest_winning_play_time = quickest_winning_play&.time_in_seconds
-    @quickest_winning_play_difficulty = quickest_winning_play&.difficulty&.capitalize
     easy_plays = filter_plays_by_difficulty(user.plays, "easy")
     medium_plays = filter_plays_by_difficulty(user.plays, "medium")
     hard_plays = filter_plays_by_difficulty(user.plays, "hard")
@@ -61,10 +59,6 @@ class UsersController < ApplicationController
 
   def user
     User.find(@current_user.id)
-  end
-
-  def quickest_winning_play
-    get_all_winning_plays(user.plays).sort_by(&:time_in_seconds).first
   end
 
   def get_all_winning_plays(plays)
