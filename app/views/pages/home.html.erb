@@ -2,21 +2,26 @@
 
 <section class="w-75 text-center">
   <div class="d-flex flex-column mb-5 text-wrap">
+  
     <p>Bombsweeper works just like Minesweeper only with bombs instead of mines and the option to save and track scores :)</p>
 
-    <p>Left click on a square to reveal it. Revealing the first square starts the timer (unless it's a bomb!)</p> 
-    
-    <p>If you reveal a square with a bomb, you lose. If the revealed square is safe it will show the number of (horizontally, vertically and diagonally) adjecent squares with bombs</p> 
-    
-    <p>If no surrounding squares have bombs, the revealed square will appear blank and the surrounding safe squares will automatically be revealed (triggering a cascade of square reveals)</p>
+    <p>Left click on a square to reveal it. Revealing the first square starts the timer - unless it's a bomb!</p>
 
-    <p>You can right click an unrevealed square to mark it with a flag if you suspect it has a bomb. Right clicking a flagged square removes the flag
+    <p>If you reveal a square with a bomb, you lose. If you're logged in, your loss will be stored in the database and will decrease your win percentage for that difficulty.</p>
+
+    <p>If the revealed square is safe it will show the number of (horizontally, vertically and diagonally) adjecent squares with bombs.</p> 
     
-    <p>The flag counter below the board intially specifies the number of bombs on the board and decreases as you add flags to the board. You can place as many flags as you like. A negative counter just means you've placed more flags than there are bombs</p>
+    <p>If no surrounding squares have bombs, the revealed square will appear blank and the surrounding safe squares will automatically be revealed (triggering a cascade of square reveals).</p>
 
-    <p>Once all the safe squares have been revealed, you win the game. The timer will stop and a "Submit Time" button will appear. If you're logged in, you can click the button to save your time. It will then appear on your profile (and on the scoreboard if it's good enough)</p>
+    <p>You can right click an unrevealed square to mark it with a flag if you suspect it has a bomb. Right clicking a flagged square removes the flag.</p>
+    
+    <p>The flag counter below the board intially specifies the number of bombs on the board and decreases as you add flags to the board. You can place as many flags as you like. A negative counter just means you've placed more flags than there are bombs.</p>
 
-    <p>You can reset the board and the timer at any time by clicking the "Reset" button</p>
+    <p>Once all the safe squares have been revealed, you win the game. The timer will stop and (if you're logged in) your time will be automatically saved to the database. You can view your quickest winning times and win percentages (for each difficulty) on your user profile.</p>
+
+    <p>If you're logged in, you will also see a "Submit Time" button appear. Click this button to make your time publicly displayable. It will then appear on a public scoreboard (if it is one of the top ten times for that difficulty).</p>
+
+    <p>If you wish to play again, click the "Reset" button. You can also click this button during a game. Games that are reset don't count towards your win percentages.</p>
 
     <p>Enjoy the game!</p>
   </div>  

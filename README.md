@@ -40,21 +40,21 @@ To run the app perform the following steps;
 
 ### Gameplay
 
-Left click on a square to reveal it. Revealing the first square starts the timer (unless it's a bomb!)
+Left click on a square to reveal it. Revealing the first square starts the timer - unless it's a bomb!
 
 If you reveal a square with a bomb, you lose. If you're logged in, your loss will be stored in the database and will decrease your win percentage for that difficulty.
 
 If the revealed square is safe it will show the number of (horizontally, vertically and diagonally) adjecent squares with bombs.
 
-If no surrounding squares have bombs, the revealed square will appear blank and the surrounding safe squares will automatically be revealed (triggering a cascade of square reveals)
+If no surrounding squares have bombs, the revealed square will appear blank and the surrounding safe squares will automatically be revealed (triggering a cascade of square reveals).
 
-You can right click an unrevealed square to mark it with a flag if you suspect it has a bomb. Right clicking a flagged square removes the flag
+You can right click an unrevealed square to mark it with a flag if you suspect it has a bomb. Right clicking a flagged square removes the flag.
 
-The flag counter below the board intially specifies the number of bombs on the board and decreases as you add flags to the board. You can place as many flags as you like. A negative counter just means you've placed more flags than there are bombs
+The flag counter below the board intially specifies the number of bombs on the board and decreases as you add flags to the board. You can place as many flags as you like. A negative counter just means you've placed more flags than there are bombs.
 
-Once all the safe squares have been revealed, you win the game. The timer will stop and, if you're logged in, your time will be automatically saved to the database. You can view your quickest winning times and win percentages (for each difficulty) on your user profile.
+Once all the safe squares have been revealed, you win the game. The timer will stop and (if you're logged in) your time will be automatically saved to the database. You can view your quickest winning times and win percentages (for each difficulty) on your user profile.
 
-Logged in users will also see a (functional) "Submit Time" button appear. Click this button to make your time publicly displayable. It will then appear on a public scoreboard (if it is one of the top ten times for that difficulty).
+If you're logged in, you will also see a (functional) "Submit Time" button appear. Click this button to make your time publicly displayable. It will then appear on a public scoreboard (if it is one of the top ten times for that difficulty).
 
 Please note that currently the "Submit Time" button appears to all users after a game is won, but will not do anything if clicked by a non-logged in user. The non-functional "Submit Time" button will be removed for non-logged users in an upcoming update (see upcoming improvements).
 
