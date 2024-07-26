@@ -2,7 +2,7 @@ body > main > section.details > div > p {
   white-space: nowrap;
 }
 
-body > main > section > div > p > span {
+body > main > section p > span {
   font-weight: 600;
 }
 
