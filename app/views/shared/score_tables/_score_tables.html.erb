@@ -1,9 +1,10 @@
 <% easy_win_percentage ||= nil %>
 <% medium_win_percentage ||= nil %>
 <% hard_win_percentage ||= nil %>
+<% show_user ||= false %>
 
 <section class="mt-4 mb-4 text-center">
-  <%= render partial: "shared/score_tables/score_table", locals: {difficulty: "Easy", win_percentage: easy_win_percentage, plays: easy_plays} %>
-  <%= render partial: "shared/score_tables/score_table", locals: {difficulty: "Medium", win_percentage: medium_win_percentage, plays: medium_plays} %>
-  <%= render partial: "shared/score_tables/score_table", locals: {difficulty: "Hard", win_percentage: hard_win_percentage, plays: hard_plays} %>
+  <%= render partial: "shared/score_tables/score_table", locals: {difficulty: "Easy", win_percentage: easy_win_percentage, plays: easy_plays, show_user: show_user} %>
+  <%= render partial: "shared/score_tables/score_table", locals: {difficulty: "Medium", win_percentage: medium_win_percentage, plays: medium_plays, show_user: show_user} %>
+  <%= render partial: "shared/score_tables/score_table", locals: {difficulty: "Hard", win_percentage: hard_win_percentage, plays: hard_plays, show_user: show_user} %>
 </section>
