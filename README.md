@@ -1,19 +1,15 @@
 # BombSweeper
 
-BombSweeper is a Minesweeper clone built using Ruby on Rails, React.js and Bootstrap that uses bombs instead of bombs, while including the option to create an account, log in, save your time and view the fastest times.
+BombSweeper is a Minesweeper clone (built using Bootstrap, React.js and Ruby on Rails) that uses bombs instead of mines. It includes additional features such as the option to create an account, track your win percentages and times and submit your best times to a public scoreboard.
 
 ## Features
 
-- The BombSweeper game (a clone of Minesweeper that uses bombs instead of bombs)
-- The option to save your time after a completed game (upcoming feature)
+- The BombSweeper game (a clone of Minesweeper that uses bombs instead of mines)
 - User accounts with profiles featuring the user's win percentages and quickest winning times (for each difficulty)
-- A scoreboards featuring the best submitted times for all users
+- For logged in users, times are saved after a game is won and can be submitted to a public scoreboard featuring the best times for all users
 
 ## Upcoming Improvements
 
-- Fixing instructions styling
-- Add "x" to wrongly flagged squares at the end of the game
-- Saving the scores to the backend
 - Removing the "Submit Time" button for non-logged in users
 
 ## Technologies Used
@@ -36,25 +32,29 @@ To run the app perform the following steps;
 
 4. In the new tab, run "cd frontend"
 
-5. Run "npm start", then open a browser and navigate to "localhost:3000"
+5. Run "npm start"
+
+6. Open a browser, navigate to "localhost:3000" and scroll down to see the game
 
 ### Gameplay
 
 Left click on a square to reveal it. Revealing the first square starts the timer - unless it's a bomb!
 
-If you reveal a square with a bomb, you lose. If you're logged in, your loss will be stored in the database and will decrease your win percentage for that difficulty.
+If you reveal a square with a bomb, you lose. If you're logged in, your loss will be stored in the database and will decrease your win percentage for the selected difficulty.
 
-If the revealed square is safe it will show the number of (horizontally, vertically and diagonally) adjecent squares with bombs.
+If the revealed square is safe, it will display the number of (horizontally, vertically and diagonally) adjecent squares with bombs.
 
 If no surrounding squares have bombs, the revealed square will appear blank and the surrounding safe squares will automatically be revealed (triggering a cascade of square reveals).
 
-You can right click an unrevealed square to mark it with a flag if you suspect it has a bomb. Right clicking a flagged square removes the flag.
+If you suspect that an unrevealed square has a bomb, you can right click it to mark it with a flag. Right clicking a flagged square removes the flag.
 
 The flag counter below the board intially specifies the number of bombs on the board and decreases as you add flags to the board. You can place as many flags as you like. A negative counter just means you've placed more flags than there are bombs.
 
-Once all the safe squares have been revealed, you win the game. The timer will stop and (if you're logged in) your time will be automatically saved to the database. You can view your quickest winning times and win percentages (for each difficulty) on your user profile.
+You can pause the game by clicking the "Pause" button. This will stop the timer, but also hide all of the board's squares so you can't cheat.
 
-If you're logged in, you will also see a (functional) "Submit Time" button appear. Click this button to make your time publicly displayable. It will then appear on a public scoreboard (if it is one of the top ten times for that difficulty).
+If you manage to reveal all the safe squares, you win the game. The timer will stop and (if you're logged in) your time will be automatically saved to the database. You can view your quickest winning times and win percentages (for each difficulty) on your user profile.
+
+If you're logged in, a (functional) "Submit Time" button will appear to the right of the "Pause" button. Click this button to make your time publicly displayable. It will then appear on a public scoreboard (if it is one of the top ten times for the selected difficulty).
 
 Please note that currently the "Submit Time" button appears to all users after a game is won, but will not do anything if clicked by a non-logged in user. The non-functional "Submit Time" button will be removed for non-logged users in an upcoming update (see upcoming improvements).
 

@@ -5,10 +5,12 @@
     <p><span>Win Percentage:</span> <%= win_percentage %>%</p>
   <% end %>
 
-  <table class="table mt-4 mb-5">
+  <table class="table mt-2 mb-5">
     <thead>
       <tr>
-        <th class="px-4">Username</th>
+        <% if show_user %>
+          <th class="px-4">Username</th>
+        <% end %>  
         <th class="px-4">Time</th>
         <th class="px-4">Difficulty</th>
         <th class="px-4 text-nowrap">Achieved At</th>
@@ -17,7 +19,9 @@
     <tbody>
       <% plays.map do |play| %>
         <tr>
-          <td class="px-4"><%= User.find(play.user_id).username %></td>
+          <% if show_user %>
+            <td class="px-4"><%= User.find(play.user_id).username %></td>
+          <% end %>  
           <td class="px-4"><%= play.time_in_seconds %>s</td>
           <td class="px-4"><%= play.difficulty.capitalize %></td>
           <td class="px-4 text-nowrap"><%= convert_time(play.created_at) %></td>
