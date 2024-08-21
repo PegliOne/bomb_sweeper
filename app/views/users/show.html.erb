@@ -1,17 +1,13 @@
 <h2>Hi <%= @user.username %>!</h2>
 
-<section class="details d-flex justify-content-center w-75 mb-5">
-  <div class="d-flex flex-column mx-3">
-    <p><span>Email:</span> <%= @user.email %></p> 
-  </div>  
-  <div class="d-flex flex-column mx-3">
-    <p><span>Joined:</span> <%= convert_time_to_date(@user.created_at) %></p>
-  </div>
+<section class="details d-flex justify-content-center mb-4">
+  <div class="mx-3"><span class="fw-bold">Email:</span> <%= @user.email %></div> 
+  <div class="mx-3"><span class="fw-bold">Joined:</span> <%= convert_time_to_date(@user.created_at) %></div>
 </section>
 
 <p class="mb-0">You have won <%= @win_count %> <%= "time".pluralize(@win_count) %>. Your quickest winning times are displayed below. </p>
 
-<p>This includes times you did not choose to submit to the public scoreboard.</p>
+<p class="mb-0">This includes times you did not choose to submit to the public scoreboard.</p>
 
 <%= render partial: "shared/score_tables/score_tables", locals: {easy_win_percentage: @easy_win_percentage, medium_win_percentage: @medium_win_percentage, hard_win_percentage: @hard_win_percentage, easy_plays: @displayed_easy_plays, medium_plays: @displayed_medium_plays, hard_plays: @displayed_hard_plays} %>
 
