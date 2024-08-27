@@ -1,20 +1,7 @@
-body > main > section.details > div > p {
-  white-space: nowrap;
-}
-
-body > main > section p > span {
-  font-weight: 600;
-}
-
 /* Mobile Styles */
 
 @media screen and (max-width: 767px) {
   section.details {
     flex-direction: column;
-    align-items: center;
-  }
-
-  section.details > div {
-    align-items: center;
   }
 }
