@@ -310,6 +310,7 @@ function App() {
           seconds={seconds}
           resetPlay={resetPlay}
           pausePlay={pausePlay}
+          playInProgress={playInProgress}
           playPaused={playPaused}
           playWon={playWon}
           submitTime={submitTime}
