@@ -73,6 +73,9 @@ function App() {
   }
 
   function pausePlay() {
+    if (!playInProgress) {
+      return;
+    }
     if (!playPaused) {
       clearInterval(timerInterval);
       setPlayPaused(true);
