@@ -2,6 +2,7 @@ const Timer = ({
   seconds,
   resetPlay,
   pausePlay,
+  playInProgress,
   playPaused,
   playWon,
   submitTime,
@@ -26,7 +27,9 @@ const Timer = ({
         </span>
       </span>
       <button onClick={resetPlay}>Reset</button>
-      <button onClick={pausePlay}>{playPaused ? "Unpause" : "Pause"}</button>
+      <button className={playInProgress ? "" : "disabled"} onClick={pausePlay}>
+        {playPaused ? "Unpause" : "Pause"}
+      </button>
       <div className="timer-submit">
         {playWon && (
           <button

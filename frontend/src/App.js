@@ -73,6 +73,9 @@ function App() {
   }
 
   function pausePlay() {
+    if (!playInProgress) {
+      return;
+    }
     if (!playPaused) {
       clearInterval(timerInterval);
       setPlayPaused(true);
@@ -310,6 +313,7 @@ function App() {
           seconds={seconds}
           resetPlay={resetPlay}
           pausePlay={pausePlay}
+          playInProgress={playInProgress}
           playPaused={playPaused}
           playWon={playWon}
           submitTime={submitTime}

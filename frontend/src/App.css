@@ -146,6 +146,18 @@ section.timer > div > button:hover {
   cursor: pointer;
 }
 
+section.timer > button.disabled,
+section.timer > div > button.disabled {
+  background-color: lightgrey;
+  cursor: default;
+}
+
+section.timer > button.disabled:hover,
+section.timer > div > button.disabled:hover {
+  background-color: lightgrey;
+  cursor: default;
+}
+
 section.timer > span {
   font-weight: 600;
 }
